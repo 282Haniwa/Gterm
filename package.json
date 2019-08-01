@@ -1,0 +1,41 @@
+{
+  "name": "bash-gui",
+  "version": "1.0.0",
+  "description": "GUIでBashを書いて実行できるアプリケーション",
+  "main": "index.js",
+  "author": "282Haniwa",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "electron": "^5.0.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.3"
+  },
+  "scripts": {
+    "start": "npm-run-all -p build:dev start:app",
+    "start:app": "electron app",
+    "build": "webpack -p --progress",
+    "build:dev": "webpack --watch --progress",
+    "lint": "eslint . --cache && echo \"eslint: no lint errors\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.35.0",
+    "webpack-command": "^0.4.2"
+  }
+}
