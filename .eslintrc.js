@@ -26,9 +26,9 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
-      'alias': [
-        ['src', './src']
-      ]
+      webpack: {
+        config: 'webpack.config.js'
+      }
     }
   },
   rules: {
