@@ -12,9 +12,12 @@ const useStyles = makeStyles({
   menuBar: {
     height: '56px'
   },
+  menuBarFake: {
+    height: '56px'
+  },
   content: {
     display: 'flex',
-    height: 'calc(100% - 56px)'
+    height: '100%'
   },
   gui: {
     width: '50%'
@@ -27,6 +30,7 @@ const App = () => {
   return (
     <div className={classes.root}>
       <MenuBar className={classes.menuBar} />
+      <div className={classes.menuBarFake} />
       <div className={classes.content}>
         <GUI className={classes.gui} />
       </div>
