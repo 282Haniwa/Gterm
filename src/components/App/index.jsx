@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import MenuBar from 'src/components/MenuBar'
 import GUI from 'src/components/GUI'
+import { ui } from 'src/static'
 
 const useStyles = makeStyles({
   root: {
@@ -10,17 +11,19 @@ const useStyles = makeStyles({
     width: '100vw'
   },
   menuBar: {
-    height: '56px'
+    height: ui.menuBar.height
   },
   menuBarFake: {
-    height: '56px'
+    height: ui.menuBar.height
   },
   content: {
     display: 'flex',
-    height: '100%'
+    height: ui.content.height,
+    width: ui.content.width
   },
   gui: {
-    width: '50%'
+    height: ui.gui.height,
+    width: ui.gui.width
   }
 })
 
