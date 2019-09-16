@@ -8,12 +8,12 @@ import { makeStyles } from '@material-ui/styles'
 import Canvas from 'src/components/Canvas'
 import Group from 'src/components/Group'
 import Palette from 'src/components/Palette'
-import DraggableBlock from 'src/components/DraggableBlock'
+import DragTrackingBlock from 'src/components/DragTrackingBlock'
 import { setViewSize, blockMoveTo, setBlockInfo } from 'src/actions/gui'
 import { ui } from 'src/static'
 
 const useStyles = makeStyles(theme => ({
-  draggableBlock: {
+  dragTrackingBlock: {
     position: 'absolute',
     zIndex: theme.zIndex.appBar + 1
   }
@@ -97,9 +97,9 @@ const GUI = props => {
           width={`${viewSize.canvas.width}`}
         />
       </svg>
-      <DraggableBlock
-        className={classes.draggableBlock}
-        name='draggable-block'
+      <DragTrackingBlock
+        className={classes.dragTrackingBlock}
+        name='drag-tracking-block'
         onDrag={handleDrag}
         onDragEnd={handleDragEnd}
         onDragStart={handleDragStart}
