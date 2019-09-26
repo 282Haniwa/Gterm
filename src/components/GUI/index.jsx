@@ -9,7 +9,7 @@ import Canvas from 'src/components/Canvas'
 import Group from 'src/components/Group'
 import Palette from 'src/components/Palette'
 import DragTrackingBlock from 'src/components/DragTrackingBlock'
-import { setViewSize, blockMoveTo, setBlockInfo } from 'src/actions/gui'
+import { setViewSize } from 'src/actions/gui'
 import { ui } from 'src/static'
 
 const useStyles = makeStyles(theme => ({
@@ -37,37 +37,8 @@ const GUI = props => {
     handleResize()
   }, [handleResize])
 
-  const handleDragStart = useCallback(event => {
-    console.log('handleDragStart', event.nativeEvent)
-    dispatch(setBlockInfo({
-      isDragged: true,
-      display: true,
-      offsetX: event.nativeEvent.offsetX,
-      offsetY: event.nativeEvent.offsetY
-    }))
-  }, [dispatch])
-
-  const handleDrag = useCallback(event => {
-    console.log('handleDrag', event)
-    if (dragBlock.info.isDragged) {
-      dispatch(blockMoveTo({
-        x: event.clientX - dragBlock.info.offsetX,
-        y: event.clientY - dragBlock.info.offsetY
-      }))
-    }
-  }, [dispatch, dragBlock.info])
-
-  const handleDragEnd = useCallback(event => {
-    console.log('handleDragEnd', event)
-    dispatch(setBlockInfo({ isDragged: false, display: false }))
-  }, [dispatch])
-
   useEffect(() => {
     handleLoad()
-    dispatch(blockMoveTo({
-      x: 0,
-      y: ui.menuBar.height
-    }))
     window.addEventListener('resize', handleResize)
 
     return () => {
@@ -100,11 +71,8 @@ const GUI = props => {
       <DragTrackingBlock
         className={classes.dragTrackingBlock}
         name='drag-tracking-block'
-        onDrag={handleDrag}
-        onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
         style={{
-          display: 'block',
+          display: dragBlock.info.display ? 'block' : 'none',
           transform: `translate3d(${dragBlock.position.x}px, ${dragBlock.position.y - ui.menuBar.height}px, 1000px)`
         }}
       />

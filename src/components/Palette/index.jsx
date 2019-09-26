@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import DraggableBlock from 'src/components/DraggableBlock'
 
 const propTypes = {
   height: PropTypes.string,
@@ -29,6 +30,9 @@ const Palette = props => {
         name='palette'
         width={width}
         {...rectProps}
+      />
+      <DraggableBlock
+        x={rectProps.x}
       />
     </svg>
   )
