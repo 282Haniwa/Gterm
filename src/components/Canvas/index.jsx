@@ -15,22 +15,11 @@ const defaultProps = {
 }
 
 const Canvas = props => {
-  const {
-    rectProps,
-    height,
-    width,
-    ...other
-  } = props
+  const { rectProps, height, width, ...other } = props
 
   return (
     <svg xmlns='http://www.w3.org/2000/svg' {...other}>
-      <rect
-        fill='#fafafa'
-        height={height}
-        name='canvas'
-        width={width}
-        {...rectProps}
-      />
+      <rect fill='#fafafa' height={height} name='canvas' width={width} {...rectProps} />
     </svg>
   )
 }

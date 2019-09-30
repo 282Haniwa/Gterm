@@ -15,25 +15,12 @@ const defaultProps = {
 }
 
 const Palette = props => {
-  const {
-    rectProps,
-    height,
-    width,
-    ...other
-  } = props
+  const { rectProps, height, width, ...other } = props
 
   return (
     <svg xmlns='http://www.w3.org/2000/svg' {...other}>
-      <rect
-        fill='red'
-        height={height}
-        name='palette'
-        width={width}
-        {...rectProps}
-      />
-      <DraggableBlock
-        x={rectProps.x}
-      />
+      <rect fill='red' height={height} name='palette' width={width} {...rectProps} />
+      <DraggableBlock x={rectProps.x} />
     </svg>
   )
 }

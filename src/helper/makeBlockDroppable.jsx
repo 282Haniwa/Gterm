@@ -53,15 +53,22 @@ const makeBlockDroppable = Component => {
 
     const handleBlockOver = event => {
       if (dragBlock.info.isDragged) {
-        // console.log('handleBlockOver', event)
+        console.log('handleBlockOver', event)
         if (onBlockOver) {
           onBlockOver(event)
         }
       }
     }
 
-    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-    return <Component onMouseMove={handleBlockMove} onMouseOver={handleBlockOver} onMouseUp={handleBlockDrop} {...other} />
+    return (
+      <Component
+        onFocus={handleBlockOver}
+        onMouseMove={handleBlockMove}
+        onMouseOver={handleBlockOver}
+        onMouseUp={handleBlockDrop}
+        {...other}
+      />
+    )
   }
 
   DraggableBlock.propTypes = propTypes

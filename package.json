@@ -22,7 +22,8 @@
     "start:app": "electron app",
     "build": "webpack -p --progress",
     "build:dev": "webpack --watch --progress",
-    "lint": "eslint . --cache && echo \"eslint: no lint errors\""
+    "lint": "eslint --ext .js,.jsx ./ --cache && echo \"eslint: no lint errors\"",
+    "lint:fix": "eslint --ext .js,.jsx ./ --cache --fix && echo \"eslint: no lint errors\""
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -35,6 +36,7 @@
     "eslint-config-prettier": "^6.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-loader": "^3.0.2",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.1",

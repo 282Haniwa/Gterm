@@ -1,8 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef
-} from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import Canvas from 'src/components/Canvas'
@@ -27,10 +23,12 @@ const GUI = props => {
   const classes = useStyles()
 
   const handleResize = useCallback(() => {
-    dispatch(setViewSize({
-      height: rootRef.current.height.baseVal.value,
-      width: rootRef.current.width.baseVal.value
-    }))
+    dispatch(
+      setViewSize({
+        height: rootRef.current.height.baseVal.value,
+        width: rootRef.current.width.baseVal.value
+      })
+    )
   }, [dispatch])
 
   const handleLoad = useCallback(() => {
@@ -48,12 +46,7 @@ const GUI = props => {
 
   return (
     <>
-      <svg
-        onLoad={handleResize}
-        ref={rootRef}
-        xmlns='http://www.w3.org/2000/svg'
-        {...props}
-      >
+      <svg onLoad={handleResize} ref={rootRef} xmlns='http://www.w3.org/2000/svg' {...props}>
         <Group width={`${viewSize.group.width}`} />
         <Palette
           rectProps={{
@@ -74,7 +67,8 @@ const GUI = props => {
         style={{
           pointerEvents: 'none',
           display: dragBlock.info.display ? 'block' : 'none',
-          transform: `translate3d(${dragBlock.position.x}px, ${dragBlock.position.y - ui.menuBar.height}px, 1000px)`
+          transform: `translate3d(${dragBlock.position.x}px, ${dragBlock.position.y -
+            ui.menuBar.height}px, 1000px)`
         }}
       />
     </>

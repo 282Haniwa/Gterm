@@ -14,22 +14,11 @@ const defaultProps = {
 }
 
 const Group = props => {
-  const {
-    rectProps,
-    height,
-    width,
-    ...other
-  } = props
+  const { rectProps, height, width, ...other } = props
 
   return (
     <svg xmlns='http://www.w3.org/2000/svg' {...other}>
-      <rect
-        fill='blue'
-        height={height}
-        name='group'
-        width={width}
-        {...rectProps}
-      />
+      <rect fill='blue' height={height} name='group' width={width} {...rectProps} />
     </svg>
   )
 }

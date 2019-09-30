@@ -14,10 +14,17 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json']
   },
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }]
+    rules: [
+      {
+        enforce: 'pre',
+        test: /(\.js|\.jsx)$/,
+        loader: 'eslint-loader'
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
+    ]
   }
 }

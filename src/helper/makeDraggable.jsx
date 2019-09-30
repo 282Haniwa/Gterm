@@ -9,37 +9,41 @@ const makeDraggable = Component => {
   }
 
   const DraggableComponent = props => {
-    const {
-      onDrag,
-      onDragEnd,
-      onDragStart,
-      ...other
-    } = props
+    const { onDrag, onDragEnd, onDragStart, ...other } = props
     const [isDragged, setIsDragged] = useState(false)
 
-    const handleDragStart = useCallback(event => {
-      if (onDragStart) {
-        setIsDragged(true)
-        onDragStart(event)
-      }
-    }, [onDragStart])
-
-    const handleDrag = useCallback(event => {
-      if (onDrag && isDragged) {
-        if (event.buttons === 0) {
-          setIsDragged(false)
-          return
+    const handleDragStart = useCallback(
+      event => {
+        if (onDragStart) {
+          setIsDragged(true)
+          onDragStart(event)
         }
-        onDrag(event)
-      }
-    }, [onDrag, isDragged])
+      },
+      [onDragStart]
+    )
 
-    const handleDragEnd = useCallback(event => {
-      if (onDragEnd && isDragged) {
-        setIsDragged(false)
-        onDragEnd(event)
-      }
-    }, [onDragEnd, isDragged])
+    const handleDrag = useCallback(
+      event => {
+        if (onDrag && isDragged) {
+          if (event.buttons === 0) {
+            setIsDragged(false)
+            return
+          }
+          onDrag(event)
+        }
+      },
+      [onDrag, isDragged]
+    )
+
+    const handleDragEnd = useCallback(
+      event => {
+        if (onDragEnd && isDragged) {
+          setIsDragged(false)
+          onDragEnd(event)
+        }
+      },
+      [onDragEnd, isDragged]
+    )
 
     useEffect(() => {
       window.addEventListener('mousemove', handleDrag)
