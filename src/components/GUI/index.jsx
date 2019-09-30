@@ -72,6 +72,7 @@ const GUI = props => {
         className={classes.dragTrackingBlock}
         name='drag-tracking-block'
         style={{
+          pointerEvents: 'none',
           display: dragBlock.info.display ? 'block' : 'none',
           transform: `translate3d(${dragBlock.position.x}px, ${dragBlock.position.y - ui.menuBar.height}px, 1000px)`
         }}

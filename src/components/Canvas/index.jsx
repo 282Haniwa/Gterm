@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 
 const propTypes = {
   height: PropTypes.string,
@@ -37,4 +38,4 @@ const Canvas = props => {
 Canvas.propTypes = propTypes
 Canvas.defaultProps = defaultProps
 
-export default Canvas
+export default makeBlockDroppable(Canvas)
