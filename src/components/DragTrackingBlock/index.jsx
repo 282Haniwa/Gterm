@@ -24,10 +24,12 @@ const DragTrackingBlock = props => {
 
   const handleDragEnd = useCallback(
     event => {
-      console.log('handleDragEnd', event)
-      dispatch(setBlockInfo({ isDragged: false, display: false }))
+      if (dragBlock.info.isDragged) {
+        console.log('handleDragEnd', event)
+        dispatch(setBlockInfo({ isDragged: false, display: false }))
+      }
     },
-    [dispatch]
+    [dispatch, dragBlock.info.isDragged]
   )
 
   useEffect(() => {
