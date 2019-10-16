@@ -7,7 +7,7 @@ const MenuBar = props => (
   <AppBar color='default' position='absolute' {...props}>
     <Toolbar>
       <Typography color='inherit' variant='h6'>
-        {'Bash GUI'}
+        {'Gterm'}
       </Typography>
     </Toolbar>
   </AppBar>

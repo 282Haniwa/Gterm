@@ -1,7 +1,7 @@
 {
-  "name": "bash-gui",
+  "name": "gterm",
   "version": "1.0.0",
-  "description": "GUIでBashを書いて実行できるアプリケーション",
+  "description": "GUIを用いたコマンドのビルドができるターミナルエミュレータ",
   "main": "app/index.js",
   "author": "282Haniwa",
   "license": "MIT",
