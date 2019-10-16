@@ -2,10 +2,12 @@ const path = require('path')
 
 module.exports = {
   mode: 'development',
+  target: 'electron-renderer',
   entry: './src/index.jsx',
   output: {
     path: `${__dirname}/dist`,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
   },
   resolve: {
     alias: {
@@ -26,5 +28,6 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  }
+  },
+  externals: ['electron']
 }

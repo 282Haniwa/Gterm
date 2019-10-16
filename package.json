@@ -6,24 +6,29 @@
   "author": "282Haniwa",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.3.0",
-    "@material-ui/styles": "^4.3.0",
-    "electron": "^6.0.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.3"
-  },
   "scripts": {
     "start": "npm-run-all -p build:dev start:app",
     "start:app": "electron app",
     "build": "webpack -p --progress",
     "build:dev": "webpack --watch --progress",
+    "rebuild": "electron-rebuild",
     "lint": "eslint --ext .js,.jsx ./ --cache && echo \"eslint: no lint errors\"",
-    "lint:fix": "eslint --ext .js,.jsx ./ --cache --fix && echo \"eslint: no lint errors\""
+    "lint:fix": "eslint --ext .js,.jsx ./ --cache --fix && echo \"eslint: no lint errors\"",
+    "clean": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.3.0",
+    "@material-ui/styles": "^4.3.0",
+    "electron": "^6.0.1",
+    "node-pty": "^0.9.0-beta27",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.3",
+    "xterm": "^4.1.0",
+    "xterm-addon-fit": "^0.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -31,6 +36,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",
+    "electron-rebuild": "^1.8.6",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^6.3.0",

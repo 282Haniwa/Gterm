@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import MenuBar from 'src/components/MenuBar'
 import GUI from 'src/components/GUI'
+import CUI from 'src/components/CUI'
 import { ui } from 'src/static'
 
 const useStyles = makeStyles({
@@ -24,6 +25,10 @@ const useStyles = makeStyles({
   gui: {
     height: ui.gui.height,
     width: ui.gui.width
+  },
+  cui: {
+    height: '50%',
+    width: '50%'
   }
 })
 
@@ -36,6 +41,7 @@ const App = () => {
       <div className={classes.menuBarFake} />
       <div className={classes.content}>
         <GUI className={classes.gui} />
+        <CUI className={classes.cui} id='cui' />
       </div>
     </div>
   )
