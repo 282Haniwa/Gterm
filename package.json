@@ -7,6 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "postinstall": "electron-rebuild",
     "start": "npm-run-all -p build:dev start:app",
     "start:app": "electron app",
     "build": "webpack -p --progress",
