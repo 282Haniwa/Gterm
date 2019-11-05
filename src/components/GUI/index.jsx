@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import Canvas from 'src/components/Canvas'
@@ -9,13 +11,23 @@ import { setViewSize } from 'src/actions/gui'
 import { ui } from 'src/static'
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: 0
+  },
   dragTrackingBlock: {
     position: 'absolute',
     zIndex: theme.zIndex.appBar + 1
   }
 }))
 
+const propTypes = {
+  className: PropTypes.string
+}
+
 const GUI = props => {
+  const { className, ...other } = props
   const rootRef = useRef(null)
   const dispatch = useDispatch()
   const gui = useSelector(state => state.gui)
@@ -25,8 +37,8 @@ const GUI = props => {
   const handleResize = useCallback(() => {
     dispatch(
       setViewSize({
-        height: rootRef.current.height.baseVal.value,
-        width: rootRef.current.width.baseVal.value
+        height: rootRef.current.clientHeight,
+        width: rootRef.current.clientWidth
       })
     )
   }, [dispatch])
@@ -46,21 +58,11 @@ const GUI = props => {
 
   return (
     <>
-      <svg onLoad={handleResize} ref={rootRef} xmlns='http://www.w3.org/2000/svg' {...props}>
-        <Group width={`${viewSize.group.width}`} />
-        <Palette
-          rectProps={{
-            x: `${viewSize.palette.offsetX}`
-          }}
-          width={`${viewSize.palette.width}`}
-        />
-        <Canvas
-          rectProps={{
-            x: `${viewSize.canvas.offsetX}`
-          }}
-          width={`${viewSize.canvas.width}`}
-        />
-      </svg>
+      <div className={clsx(classes.root, className)} onLoad={handleResize} ref={rootRef} {...other}>
+        <Group height={viewSize.group.height} width={viewSize.group.width} />
+        <Palette height={viewSize.palette.height} width={viewSize.palette.width} />
+        <Canvas height={viewSize.canvas.height} width={viewSize.canvas.width} />
+      </div>
       <DragTrackingBlock
         className={classes.dragTrackingBlock}
         name='drag-tracking-block'
@@ -74,5 +76,7 @@ const GUI = props => {
     </>
   )
 }
+
+GUI.propTypes = propTypes
 
 export default GUI

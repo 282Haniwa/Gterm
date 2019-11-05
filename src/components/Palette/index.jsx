@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import DraggableBlock from 'src/components/DraggableBlock'
 
 const propTypes = {
-  height: PropTypes.string,
+  height: PropTypes.number,
   rectProps: PropTypes.object,
-  width: PropTypes.string
+  width: PropTypes.number
 }
 
 const defaultProps = {
@@ -18,10 +18,17 @@ const Palette = props => {
   const { rectProps, height, width, ...other } = props
 
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' {...other}>
-      <rect fill='red' height={height} name='palette' width={width} {...rectProps} />
-      <DraggableBlock x={rectProps.x} />
-    </svg>
+    <div
+      style={{
+        height: height,
+        width: width
+      }}
+    >
+      <svg height={height} width={width} xmlns='http://www.w3.org/2000/svg' {...other}>
+        <rect fill='red' height={height} name='palette' width={width} {...rectProps} />
+        <DraggableBlock x={rectProps.x} />
+      </svg>
+    </div>
   )
 }
 
