@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     marginRight: theme.spacing(1),
     borderRadius: '5px',
-    border: 'solid 1px black',
+    border: `solid 1px ${theme.palette.divider}`,
     backgroundColor: blue[400]
   },
   command: {
