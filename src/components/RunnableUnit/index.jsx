@@ -3,16 +3,20 @@ import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
 import Command from '../Command'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    boxSizing: 'border-box'
-  }
-}))
+const useStyles = makeStyles(
+  theme => ({
+    root: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+      paddingRight: theme.spacing(8),
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      boxSizing: 'border-box'
+    }
+  }),
+  { name: 'RunnableUnit' }
+)
 
 const propTypes = {
   data: PropTypes.shape({
@@ -28,6 +32,7 @@ const defaultProps = {}
 const RunnableUnit = props => {
   const { data } = props
   const classes = useStyles()
+
   return (
     <div className={classes.root}>
       {data.commands.map(command => (

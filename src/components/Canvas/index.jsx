@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import CommandList from '../CommandList'
+import { commandList } from '../../mock'
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    width: 'max-content',
+    overflowY: 'auto'
   }
 }))
 
@@ -35,7 +38,7 @@ const Canvas = props => {
       }}
       {...other}
     >
-      <CommandList />
+      <CommandList data={commandList} />
     </div>
   )
 }

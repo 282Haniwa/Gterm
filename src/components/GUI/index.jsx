@@ -13,7 +13,8 @@ const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    fontSize: 0
+    fontSize: 0,
+    fontFamily: 'monaco, courier-new, courier, monospace'
   },
   dragTrackingBlock: {
     position: 'absolute',
