@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { blockMoveTo, setBlockInfo } from 'src/actions/gui'
+import { useDispatch, useSelector } from 'react-redux'
+import { setBlockInfo } from 'src/actions/gui'
 import PropTypes from 'prop-types'
 
 const makeBlockDraggable = Component => {
@@ -11,39 +11,51 @@ const makeBlockDraggable = Component => {
 
   const DraggableBlock = props => {
     const { onDragEnd, onDragStart, ...other } = props
-
+    const commandTrackingBlockRef = useSelector(state => state.gui.dragBlock.ref.command)
     const dispatch = useDispatch()
     const handleDragStart = useCallback(
       event => {
-        console.log('handleDragStart', event.nativeEvent)
+        console.log('handleDragStart', event)
         const rect = event.target.getBoundingClientRect()
         const mouseOffsetX = event.clientX - rect.left
         const mouseOffsetY = event.clientY - rect.top
         dispatch(
           setBlockInfo({
-            isDragged: true,
-            display: true,
-            offsetX: mouseOffsetX,
-            offsetY: mouseOffsetY
+            isDragged: true
           })
         )
-        dispatch(
-          blockMoveTo({
-            x: event.nativeEvent.clientX - mouseOffsetX,
-            y: event.nativeEvent.clientY - mouseOffsetY
-          })
-        )
+        if (commandTrackingBlockRef) {
+          event.dataTransfer.setDragImage(
+            commandTrackingBlockRef.current,
+            mouseOffsetX,
+            mouseOffsetY
+          )
+        }
+        if (onDragStart) {
+          onDragStart(event)
+        }
       },
-      [dispatch]
+      [dispatch, onDragStart, commandTrackingBlockRef]
     )
-    // const handleDragStart = useCallback(event => {
-    //   // TODO: ブロックの情報をstoreへ登録する
-    //   if (onDragStart) {
-    //     onDragStart(event)
-    //   }
-    // }, [onDragStart])
 
-    return <Component onMouseDown={handleDragStart} {...other} />
+    const handleDragEnd = useCallback(
+      event => {
+        console.log('handleDragEnd', event)
+        dispatch(
+          setBlockInfo({
+            isDragged: false
+          })
+        )
+        if (onDragEnd) {
+          onDragEnd(event)
+        }
+      },
+      [dispatch, onDragEnd]
+    )
+
+    return (
+      <Component draggable onDragEnd={handleDragEnd} onDragStart={handleDragStart} {...other} />
+    )
   }
 
   DraggableBlock.propTypes = propTypes

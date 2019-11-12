@@ -1,54 +1,21 @@
-import React, { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { blockMoveTo, setBlockInfo } from 'src/actions/gui'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { setTrackingBlockRef } from 'src/actions/gui'
 import Block from 'src/components/Block'
 
 const DragTrackingBlock = props => {
   const dispatch = useDispatch()
-  const dragBlock = useSelector(state => state.gui.dragBlock)
-
-  const handleDrag = useCallback(
-    event => {
-      if (dragBlock.info.isDragged) {
-        console.log('handleDrag', event)
-        dispatch(
-          blockMoveTo({
-            x: event.clientX - dragBlock.info.offsetX,
-            y: event.clientY - dragBlock.info.offsetY
-          })
-        )
-      }
-    },
-    [dispatch, dragBlock.info]
-  )
-
-  const handleDragEnd = useCallback(
-    event => {
-      if (dragBlock.info.isDragged) {
-        console.log('handleDragEnd', event)
-        dispatch(setBlockInfo({ isDragged: false, display: false }))
-      }
-    },
-    [dispatch, dragBlock.info.isDragged]
-  )
+  const ref = useRef(null)
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleDrag)
-    window.addEventListener('mouseup', handleDragEnd)
-    window.addEventListener('mouseleave', handleDragEnd)
+    dispatch(setTrackingBlockRef({ command: ref }))
 
     return () => {
-      window.removeEventListener('mousemove', handleDrag)
-      window.removeEventListener('mouseup', handleDragEnd)
-      window.removeEventListener('mouseleave', handleDragEnd)
+      dispatch(setTrackingBlockRef({ command: null }))
     }
-  }, [handleDrag, handleDragEnd])
+  }, [dispatch])
 
-  return (
-    <svg height='64' width='64' {...props}>
-      <Block />
-    </svg>
-  )
+  return <Block ref={ref} {...props} />
 }
 
 DragTrackingBlock.displayName = 'DragTrackingBlock'

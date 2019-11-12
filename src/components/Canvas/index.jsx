@@ -14,18 +14,16 @@ const useStyles = makeStyles(() => ({
 
 const propTypes = {
   height: PropTypes.number,
-  rectProps: PropTypes.object,
   width: PropTypes.number
 }
 
 const defaultProps = {
   height: '100%',
-  rectProps: {},
   width: '100%'
 }
 
 const Canvas = props => {
-  const { rectProps, height, width, ...other } = props
+  const { height, width, ...other } = props
   const classes = useStyles()
 
   return (
@@ -35,11 +33,9 @@ const Canvas = props => {
         height: height,
         width: width
       }}
+      {...other}
     >
       <CommandList />
-      <svg height={height} width={width} xmlns='http://www.w3.org/2000/svg' {...other}>
-        <rect fill='#fafafa' height={height} name='canvas' width={width} {...rectProps} />
-      </svg>
     </div>
   )
 }

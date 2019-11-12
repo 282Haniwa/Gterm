@@ -1,6 +1,6 @@
 export const ActionTypes = {
   SET_VIEW_SIZE: 'gui/SET_VIEW_SIZE',
-  SET_DRAG_TARGET: 'gui/SET_DRAG_TARGET',
+  SET_TRACKING_BLOCK_REF: 'gui/SET_TRACKING_BLOCK_REF',
   SET_BLOCK_INFO: 'gui/SET_BLOCK_INFO',
   BLOCK_MOVE_BY: 'gui/BLOCK_MOVE_BY',
   BLOCK_MOVE_TO: 'gui/BLOCK_MOVE_TO'
@@ -14,9 +14,9 @@ export const setViewSize = ({ height, width }) => ({
   }
 })
 
-export const setDragBlock = element => ({
-  type: ActionTypes.SET_DRAG_TARGET,
-  value: element
+export const setTrackingBlockRef = value => ({
+  type: ActionTypes.SET_TRACKING_BLOCK_REF,
+  value: value
 })
 
 export const setBlockInfo = value => ({

@@ -8,9 +8,8 @@ import Group from 'src/components/Group'
 import Palette from 'src/components/Palette'
 import DragTrackingBlock from 'src/components/DragTrackingBlock'
 import { setViewSize } from 'src/actions/gui'
-import { ui } from 'src/static'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
@@ -18,7 +17,9 @@ const useStyles = makeStyles(theme => ({
   },
   dragTrackingBlock: {
     position: 'absolute',
-    zIndex: theme.zIndex.appBar + 1
+    top: '-1000px',
+    left: '-1000px',
+    backgroundColor: 'red'
   }
 }))
 
@@ -67,10 +68,10 @@ const GUI = props => {
         className={classes.dragTrackingBlock}
         name='drag-tracking-block'
         style={{
-          pointerEvents: 'none',
-          display: dragBlock.info.display ? 'block' : 'none',
-          transform: `translate3d(${dragBlock.position.x}px, ${dragBlock.position.y -
-            ui.menuBar.height}px, 1000px)`
+          // pointerEvents: 'none',
+          display: dragBlock.info.isDragged ? 'block' : 'none',
+          width: 64,
+          height: 64
         }}
       />
     </>

@@ -29,13 +29,15 @@ const initialState = {
     }
   },
   dragBlock: {
-    target: null,
+    ref: {
+      command: null,
+      runnableUnit: null
+    },
     info: {
       isDragged: false,
-      display: false,
-      type: '',
-      offsetX: 0,
-      offsetY: 0
+      type: ''
+      // offsetX: 0,
+      // offsetY: 0
     },
     position: {
       x: 0,
@@ -83,12 +85,15 @@ const setBlockInfo = (state, action) => {
   }
 }
 
-const setDragTarget = (state, action) => {
+const setTrackingBlockRef = (state, action) => {
   return {
     ...state,
     dragBlock: {
       ...state.dragBlock,
-      target: action.value
+      ref: {
+        ...state.dragBlock.ref,
+        ...action.value
+      }
     }
   }
 }
@@ -124,7 +129,7 @@ const blockMoveTo = (state, action) => {
 const actionMap = {
   [ActionTypes.SET_VIEW_SIZE]: setViewSize,
   [ActionTypes.SET_BLOCK_INFO]: setBlockInfo,
-  [ActionTypes.SET_DRAG_TARGET]: setDragTarget,
+  [ActionTypes.SET_TRACKING_BLOCK_REF]: setTrackingBlockRef,
   [ActionTypes.BLOCK_MOVE_BY]: blockMoveBy,
   [ActionTypes.BLOCK_MOVE_TO]: blockMoveTo
 }
