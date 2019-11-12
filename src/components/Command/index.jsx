@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: blue[400]
   },
   command: {
-    padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`
+    padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`,
+    color: theme.palette.common.white
   },
   args: {
     display: 'flex',
