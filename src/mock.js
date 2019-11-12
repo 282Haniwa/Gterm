@@ -57,5 +57,23 @@ export const commandList = [
       }
     },
     commands: ['commandId3', 'commandId4']
+  },
+  {
+    type: 'RunnableUnit',
+    id: 'RunnableUnit3',
+    commandMap: {
+      commandId5: {
+        id: 'commandId5',
+        type: 'Command',
+        command: 'pwd',
+        args: [],
+        pipe: {
+          stdin: null,
+          stdout: null,
+          stderr: null
+        }
+      }
+    },
+    commands: ['commandId5']
   }
 ]
