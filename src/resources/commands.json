@@ -1,22 +1,77 @@
 [
-    "pwd",
-    "cd",
-    "ls",
-    "cp",
-    "mv",
-    "rm",
-    "mkdir",
-    "touch",
-    "ln",
-    "chmod",
-    "chown",
-    "chgrp",
-    "cat",
-    "less",
-    "find",
-    "grep",
-    "ssh",
-    "ps",
-    "kill",
-    "exit"
+    {
+        "group": "基本コマンド",
+        "commands": [
+            "pwd",
+            "cd",
+            "ls",
+            "mkdir",
+            "rmdir",
+            "touch",
+            "mv",
+            "cp",
+            "rm",
+            "cat",
+            "more",
+            "less",
+            "vi",
+            "grep",
+            "find",
+            "clear",
+            "history",
+            "alias",
+            "unalias",
+            "which",
+            "echo",
+            "man",
+            "cal",
+            "date"
+        ]
+    },
+    {
+        "group": "ファイル・ディレクトリ操作",
+        "commands": [
+            "cd",
+            "pwd",
+            "ls",
+            "cp",
+            "mv",
+            "rm",
+            "mkdir",
+            "rmdir",
+            "touch",
+            "ln",
+            "chmod",
+            "chown",
+            "chgrp",
+            "cat",
+            "more",
+            "less",
+            "head",
+            "tail",
+            "sort",
+            "diff",
+            "wc",
+            "split",
+            "find",
+            "grep",
+            "cut",
+            "sed"
+        ]
+    },
+    {
+        "group": "プロセス・ジョブ操作",
+        "commands": [
+            "ps",
+            "jobs",
+            "kill",
+            "nohup",
+            "sleep",
+            "crontab"
+        ]
+    },
+    {
+        "group": "組み込みコマンド",
+        "commands": []
+    }
 ]

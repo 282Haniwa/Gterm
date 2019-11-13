@@ -8,6 +8,16 @@ const useStyles = makeStyles(theme => ({
   root: {
     overflow: 'auto'
   },
+  group: {
+    paddingBottom: theme.spacing(1)
+  },
+  groupName: {
+    width: '100%',
+    padding: theme.spacing(1),
+    paddingBottom: 0,
+    fontSize: '0.8em',
+    boxSizing: 'border-box'
+  },
   command: {
     margin: theme.spacing(1)
   }
@@ -36,17 +46,25 @@ const Palette = props => {
       }}
       {...other}
     >
-      {commands.map(command => (
-        <Command
-          className={classes.command}
-          data={{
-            ...defaultCommandData,
-            id: `palette-${command}`,
-            command: command
-          }}
-          id={`palette-${command}`}
-          key={`palette-${command}`}
-        />
+      {commands.map(commandGroup => (
+        <div
+          className={classes.group}
+          id={`palette-${commandGroup.group}`}
+          key={`palette-${commandGroup.group}`}
+        >
+          <div className={classes.groupName}>{commandGroup.group}</div>
+          {commandGroup.commands.map(command => (
+            <Command
+              className={classes.command}
+              data={{
+                ...defaultCommandData,
+                id: `palette-${commandGroup.group}-${command}`,
+                command: command
+              }}
+              key={`palette-${command}`}
+            />
+          ))}
+        </div>
       ))}
     </div>
   )
