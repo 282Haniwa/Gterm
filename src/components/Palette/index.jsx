@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
-import Command from 'src/components/Command'
+import Command, { defaultCommandData } from 'src/components/Command'
 import commands from 'src/resources/commands'
 
 const useStyles = makeStyles(theme => ({
@@ -40,11 +40,9 @@ const Palette = props => {
         <Command
           className={classes.command}
           data={{
+            ...defaultCommandData,
             id: `palette-${command}`,
-            type: 'Command',
-            command: command,
-            args: [],
-            pipe: {}
+            command: command
           }}
           id={`palette-${command}`}
           key={`palette-${command}`}

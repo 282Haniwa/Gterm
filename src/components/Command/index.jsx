@@ -5,6 +5,18 @@ import makeStyles from '@material-ui/styles/makeStyles'
 import { blue } from '@material-ui/core/colors'
 import makeBlockDraggable from 'src/helper/makeBlockDraggable'
 
+const defaultData = {
+  type: 'Command',
+  id: '',
+  command: '',
+  args: [],
+  pipe: {
+    stdin: null,
+    stdout: null,
+    stderr: null
+  }
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -54,17 +66,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  data: {
-    type: 'Command',
-    id: '',
-    command: '',
-    args: [],
-    pipe: {
-      stdin: null,
-      stdout: null,
-      stderr: null
-    }
-  }
+  data: defaultData
 }
 
 const Command = forwardRef((props, ref) => {
@@ -138,5 +140,7 @@ const Command = forwardRef((props, ref) => {
 
 Command.propTypes = propTypes
 Command.defaultProps = defaultProps
+
+export { defaultData as defaultCommandData }
 
 export default makeBlockDraggable(Command)
