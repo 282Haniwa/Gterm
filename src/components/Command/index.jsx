@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import React, { forwardRef, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
 import { blue } from '@material-ui/core/colors'
+import makeBlockDraggable from 'src/helper/makeBlockDraggable'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const propTypes = {
+  className: PropTypes.string,
   data: PropTypes.shape({
     type: PropTypes.oneOf(['Command']),
     id: PropTypes.string,
@@ -50,10 +53,22 @@ const propTypes = {
   })
 }
 
-const defaultProps = {}
+const defaultProps = {
+  data: {
+    type: 'Command',
+    id: '',
+    command: '',
+    args: [],
+    pipe: {
+      stdin: null,
+      stdout: null,
+      stderr: null
+    }
+  }
+}
 
-const RunnableUnit = props => {
-  const { data } = props
+const Command = forwardRef((props, ref) => {
+  const { className, data, ...other } = props
   const classes = useStyles()
   const [args, setArgs] = useState(data.args)
   const [inputValue, setInputValue] = useState({})
@@ -98,29 +113,30 @@ const RunnableUnit = props => {
   )
 
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, className)} ref={ref} {...other}>
       <div className={classes.command}>{data.command}</div>
       <div className={classes.args}>
-        {args.map((arg, index) => (
-          <input
-            className={classes.arg}
-            defaultValue={arg}
-            key={`${data.command}-${arg}`}
-            onBlur={handleBlurArg(index)}
-            onFocus={handleFocusArg(index)}
-            onInput={handleArgChange(index)}
-            style={{
-              width: calcStringWidth(arg)
-            }}
-            type='text'
-          />
-        ))}
+        {args &&
+          args.map((arg, index) => (
+            <input
+              className={classes.arg}
+              defaultValue={arg}
+              key={`${data.command}-${arg}`}
+              onBlur={handleBlurArg(index)}
+              onFocus={handleFocusArg(index)}
+              onInput={handleArgChange(index)}
+              style={{
+                width: calcStringWidth(arg)
+              }}
+              type='text'
+            />
+          ))}
       </div>
     </div>
   )
-}
+})
 
-RunnableUnit.propTypes = propTypes
-RunnableUnit.defaultProps = defaultProps
+Command.propTypes = propTypes
+Command.defaultProps = defaultProps
 
-export default RunnableUnit
+export default makeBlockDraggable(Command)

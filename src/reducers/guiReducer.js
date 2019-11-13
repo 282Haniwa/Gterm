@@ -35,9 +35,7 @@ const initialState = {
     },
     info: {
       isDragged: false,
-      type: ''
-      // offsetX: 0,
-      // offsetY: 0
+      data: null
     },
     position: {
       x: 0,

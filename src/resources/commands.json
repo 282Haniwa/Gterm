@@ -1,0 +1,22 @@
+[
+    "pwd",
+    "cd",
+    "ls",
+    "cp",
+    "mv",
+    "rm",
+    "mkdir",
+    "touch",
+    "ln",
+    "chmod",
+    "chown",
+    "chgrp",
+    "cat",
+    "less",
+    "find",
+    "grep",
+    "ssh",
+    "ps",
+    "kill",
+    "exit"
+]

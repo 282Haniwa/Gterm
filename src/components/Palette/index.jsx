@@ -1,6 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DraggableBlock from 'src/components/DraggableBlock'
+import makeStyles from '@material-ui/styles/makeStyles'
+import Command from 'src/components/Command'
+import commands from 'src/resources/commands'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    overflow: 'auto'
+  },
+  command: {
+    margin: theme.spacing(1)
+  }
+}))
 
 const propTypes = {
   height: PropTypes.number,
@@ -14,16 +25,31 @@ const defaultProps = {
 
 const Palette = props => {
   const { height, width, ...other } = props
+  const classes = useStyles()
 
   return (
     <div
+      className={classes.root}
       style={{
         height: height,
         width: width
       }}
       {...other}
     >
-      <DraggableBlock />
+      {commands.map(command => (
+        <Command
+          className={classes.command}
+          data={{
+            id: `palette-${command}`,
+            type: 'Command',
+            command: command,
+            args: [],
+            pipe: {}
+          }}
+          id={`palette-${command}`}
+          key={`palette-${command}`}
+        />
+      ))}
     </div>
   )
 }

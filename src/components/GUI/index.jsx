@@ -6,21 +6,18 @@ import { makeStyles } from '@material-ui/styles'
 import Canvas from 'src/components/Canvas'
 import Group from 'src/components/Group'
 import Palette from 'src/components/Palette'
-import DragTrackingBlock from 'src/components/DragTrackingBlock'
 import { setViewSize } from 'src/actions/gui'
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    fontSize: 0,
     fontFamily: 'monaco, courier-new, courier, monospace'
   },
   dragTrackingBlock: {
     position: 'absolute',
     top: '-1000px',
-    left: '-1000px',
-    backgroundColor: 'red'
+    left: '-1000px'
   }
 }))
 
@@ -32,8 +29,7 @@ const GUI = props => {
   const { className, ...other } = props
   const rootRef = useRef(null)
   const dispatch = useDispatch()
-  const gui = useSelector(state => state.gui)
-  const { viewSize, dragBlock } = gui
+  const viewSize = useSelector(state => state.gui.viewSize)
   const classes = useStyles()
 
   const handleResize = useCallback(() => {
@@ -65,16 +61,6 @@ const GUI = props => {
         <Palette height={viewSize.palette.height} width={viewSize.palette.width} />
         <Canvas height={viewSize.canvas.height} width={viewSize.canvas.width} />
       </div>
-      <DragTrackingBlock
-        className={classes.dragTrackingBlock}
-        name='drag-tracking-block'
-        style={{
-          // pointerEvents: 'none',
-          display: dragBlock.info.isDragged ? 'block' : 'none',
-          width: 64,
-          height: 64
-        }}
-      />
     </>
   )
 }

@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     fontSize: '1rem',
     width: 'max-content',
-    overflowY: 'auto'
+    overflow: 'auto'
   }
 }))
 

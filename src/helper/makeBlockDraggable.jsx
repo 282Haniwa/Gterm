@@ -1,41 +1,36 @@
-import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { forwardRef, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { setBlockInfo } from 'src/actions/gui'
 import PropTypes from 'prop-types'
 
 const makeBlockDraggable = Component => {
   const propTypes = {
+    data: PropTypes.object,
     onDragEnd: PropTypes.func,
     onDragStart: PropTypes.func
   }
 
-  const DraggableBlock = props => {
-    const { onDragEnd, onDragStart, ...other } = props
-    const commandTrackingBlockRef = useSelector(state => state.gui.dragBlock.ref.command)
+  const defaultProps = {
+    data: {}
+  }
+
+  const DraggableBlock = forwardRef((props, ref) => {
+    const { data, onDragEnd, onDragStart, ...other } = props
     const dispatch = useDispatch()
     const handleDragStart = useCallback(
       event => {
         console.log('handleDragStart', event)
-        const rect = event.target.getBoundingClientRect()
-        const mouseOffsetX = event.clientX - rect.left
-        const mouseOffsetY = event.clientY - rect.top
         dispatch(
           setBlockInfo({
-            isDragged: true
+            isDragged: true,
+            data: data
           })
         )
-        if (commandTrackingBlockRef) {
-          event.dataTransfer.setDragImage(
-            commandTrackingBlockRef.current,
-            mouseOffsetX,
-            mouseOffsetY
-          )
-        }
         if (onDragStart) {
           onDragStart(event)
         }
       },
-      [dispatch, onDragStart, commandTrackingBlockRef]
+      [dispatch, data, onDragStart]
     )
 
     const handleDragEnd = useCallback(
@@ -43,7 +38,8 @@ const makeBlockDraggable = Component => {
         console.log('handleDragEnd', event)
         dispatch(
           setBlockInfo({
-            isDragged: false
+            isDragged: false,
+            data: null
           })
         )
         if (onDragEnd) {
@@ -54,11 +50,19 @@ const makeBlockDraggable = Component => {
     )
 
     return (
-      <Component draggable onDragEnd={handleDragEnd} onDragStart={handleDragStart} {...other} />
+      <Component
+        draggable
+        data={data}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        ref={ref}
+        {...other}
+      />
     )
-  }
+  })
 
   DraggableBlock.propTypes = propTypes
+  DraggableBlock.defaultProps = defaultProps
   DraggableBlock.displayName = `Draggable-Block-${Component.displayName || Component.name}`
 
   return DraggableBlock
