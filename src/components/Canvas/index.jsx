@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import CommandList from '../CommandList'
@@ -16,6 +17,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const propTypes = {
+  className: PropTypes.string,
   height: PropTypes.number,
   width: PropTypes.number
 }
@@ -26,12 +28,12 @@ const defaultProps = {
 }
 
 const Canvas = props => {
-  const { height, width, ...other } = props
+  const { className, height, width, ...other } = props
   const classes = useStyles()
 
   return (
     <div
-      className={classes.root}
+      className={clsx(classes.root, className)}
       style={{
         height: height,
         width: width

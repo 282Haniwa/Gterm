@@ -1,6 +1,9 @@
 [
     {
-        "group": "基本コマンド",
+        "group": {
+            "key": "basic",
+            "name": "基本コマンド"
+        },
         "commands": [
             "pwd",
             "cd",
@@ -29,7 +32,10 @@
         ]
     },
     {
-        "group": "ファイル・ディレクトリ操作",
+        "group": {
+            "key": "file",
+            "name": "ファイル操作"
+        },
         "commands": [
             "cd",
             "pwd",
@@ -60,7 +66,10 @@
         ]
     },
     {
-        "group": "プロセス・ジョブ操作",
+        "group": {
+            "key": "process",
+            "name": "プロセス操作"
+        },
         "commands": [
             "ps",
             "jobs",
@@ -71,7 +80,10 @@
         ]
     },
     {
-        "group": "組み込みコマンド",
+        "group": {
+            "key": "builtin",
+            "name": "組み込み"
+        },
         "commands": []
     }
 ]

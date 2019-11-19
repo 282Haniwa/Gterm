@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
 import Command, { defaultCommandData } from 'src/components/Command'
-import commands from 'src/resources/commands'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    position: 'relative',
     overflow: 'auto'
   },
   group: {
@@ -24,41 +25,45 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.array,
   height: PropTypes.number,
   width: PropTypes.number
 }
 
 const defaultProps = {
+  data: [],
   height: '100%',
   width: '100%'
 }
 
-const Palette = props => {
-  const { height, width, ...other } = props
+const Palette = forwardRef((props, ref) => {
+  const { className, data, height, width, ...other } = props
   const classes = useStyles()
 
   return (
     <div
-      className={classes.root}
+      className={clsx(classes.root, className)}
+      ref={ref}
       style={{
         height: height,
         width: width
       }}
       {...other}
     >
-      {commands.map(commandGroup => (
+      {data.map(commandGroup => (
         <div
           className={classes.group}
-          id={`palette-${commandGroup.group}`}
-          key={`palette-${commandGroup.group}`}
+          id={`palette-${commandGroup.group.key}`}
+          key={`palette-${commandGroup.group.key}`}
         >
-          <div className={classes.groupName}>{commandGroup.group}</div>
+          <div className={classes.groupName}>{commandGroup.group.name}</div>
           {commandGroup.commands.map(command => (
             <Command
               className={classes.command}
               data={{
                 ...defaultCommandData,
-                id: `palette-${commandGroup.group}-${command}`,
+                id: `palette-${commandGroup.group.key}-${command}`,
                 command: command
               }}
               key={`palette-${command}`}
@@ -68,7 +73,7 @@ const Palette = props => {
       ))}
     </div>
   )
-}
+})
 
 Palette.propTypes = propTypes
 Palette.defaultProps = defaultProps
