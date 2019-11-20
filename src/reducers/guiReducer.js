@@ -36,10 +36,6 @@ const initialState = {
     info: {
       isDragged: false,
       data: null
-    },
-    position: {
-      x: 0,
-      y: 0
     }
   }
 }
@@ -96,40 +92,10 @@ const setTrackingBlockRef = (state, action) => {
   }
 }
 
-const blockMoveBy = (state, action) => {
-  return {
-    ...state,
-    dragBlock: {
-      ...state.dragBlock,
-      target: action.value,
-      position: {
-        x: state.dragBlock.position.x + action.value.x,
-        y: state.dragBlock.position.y + action.value.y
-      }
-    }
-  }
-}
-
-const blockMoveTo = (state, action) => {
-  return {
-    ...state,
-    dragBlock: {
-      ...state.dragBlock,
-      target: action.value,
-      position: {
-        x: action.value.x,
-        y: action.value.y
-      }
-    }
-  }
-}
-
 const actionMap = {
   [ActionTypes.SET_VIEW_SIZE]: setViewSize,
   [ActionTypes.SET_BLOCK_INFO]: setBlockInfo,
-  [ActionTypes.SET_TRACKING_BLOCK_REF]: setTrackingBlockRef,
-  [ActionTypes.BLOCK_MOVE_BY]: blockMoveBy,
-  [ActionTypes.BLOCK_MOVE_TO]: blockMoveTo
+  [ActionTypes.SET_TRACKING_BLOCK_REF]: setTrackingBlockRef
 }
 
 const guiReducer = (state = initialState, action) => {
