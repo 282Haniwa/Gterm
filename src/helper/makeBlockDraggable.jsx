@@ -19,7 +19,7 @@ const makeBlockDraggable = Component => {
     const dispatch = useDispatch()
     const handleDragStart = useCallback(
       event => {
-        console.log('handleDragStart', event)
+        console.log('handleDragStart', { ...event })
         dispatch(
           setBlockInfo({
             isDragged: true,
@@ -35,7 +35,7 @@ const makeBlockDraggable = Component => {
 
     const handleDragEnd = useCallback(
       event => {
-        console.log('handleDragEnd', event)
+        console.log('handleDragEnd', { ...event })
         dispatch(
           setBlockInfo({
             isDragged: false,

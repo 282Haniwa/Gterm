@@ -11,7 +11,7 @@ const makeBlockDroppable = Component => {
     onBlockDrop: PropTypes.func
   }
 
-  const DraggableBlock = props => {
+  const DroppableBlock = props => {
     const {
       onBlockDragEnter,
       onBlockDragExit,
@@ -27,13 +27,13 @@ const makeBlockDroppable = Component => {
         event.preventDefault()
         event.stopPropagation()
         if (dragBlock.info.isDragged) {
-          // console.log('handleBlockDragEnter', event)
+          // console.log('handleBlockDragEnter', { ...event })
           if (onBlockDragEnter) {
-            onBlockDragEnter(event)
+            onBlockDragEnter(event, dragBlock.info.data)
           }
         }
       },
-      [dragBlock.info.isDragged, onBlockDragEnter]
+      [dragBlock.info.data, dragBlock.info.isDragged, onBlockDragEnter]
     )
 
     const handleBlockDragExit = useCallback(
@@ -41,13 +41,13 @@ const makeBlockDroppable = Component => {
         event.preventDefault()
         event.stopPropagation()
         if (dragBlock.info.isDragged) {
-          // console.log('handleBlockDragExit', event)
+          // console.log('handleBlockDragExit', { ...event })
           if (onBlockDragExit) {
-            onBlockDragExit(event)
+            onBlockDragExit(event, dragBlock.info.data)
           }
         }
       },
-      [dragBlock.info.isDragged, onBlockDragExit]
+      [dragBlock.info.data, dragBlock.info.isDragged, onBlockDragExit]
     )
 
     const handleBlockDragLeave = useCallback(
@@ -55,13 +55,13 @@ const makeBlockDroppable = Component => {
         event.preventDefault()
         event.stopPropagation()
         if (dragBlock.info.isDragged) {
-          // console.log('handleBlockDragLeave', event)
+          // console.log('handleBlockDragLeave', { ...event })
           if (onBlockDragLeave) {
-            onBlockDragLeave(event)
+            onBlockDragLeave(event, dragBlock.info.data)
           }
         }
       },
-      [dragBlock.info.isDragged, onBlockDragLeave]
+      [dragBlock.info.data, dragBlock.info.isDragged, onBlockDragLeave]
     )
 
     const handleBlockDragOver = useCallback(
@@ -69,13 +69,13 @@ const makeBlockDroppable = Component => {
         event.preventDefault()
         event.stopPropagation()
         if (dragBlock.info.isDragged) {
-          // console.log('handleBlockOver', event)
+          // console.log('handleBlockOver', { ...event })
           if (onBlockDragOver) {
-            onBlockDragOver(event)
+            onBlockDragOver(event, dragBlock.info.data)
           }
         }
       },
-      [dragBlock.info.isDragged, onBlockDragOver]
+      [dragBlock.info.data, dragBlock.info.isDragged, onBlockDragOver]
     )
 
     const handleBlockDrop = useCallback(
@@ -83,13 +83,13 @@ const makeBlockDroppable = Component => {
         event.preventDefault()
         event.stopPropagation()
         if (dragBlock.info.isDragged) {
-          // console.log('handleBlockDrop', event)
+          // console.log('handleBlockDrop', { ...event })
           if (onBlockDrop) {
-            onBlockDrop(event)
+            onBlockDrop(event, dragBlock.info.data)
           }
         }
       },
-      [dragBlock.info.isDragged, onBlockDrop]
+      [dragBlock.info.data, dragBlock.info.isDragged, onBlockDrop]
     )
 
     return (
@@ -104,10 +104,10 @@ const makeBlockDroppable = Component => {
     )
   }
 
-  DraggableBlock.propTypes = propTypes
-  DraggableBlock.displayName = `Block-Droppable-${Component.displayName || Component.name}`
+  DroppableBlock.propTypes = propTypes
+  DroppableBlock.displayName = `Block-Droppable-${Component.displayName || Component.name}`
 
-  return DraggableBlock
+  return DroppableBlock
 }
 
 export default makeBlockDroppable
