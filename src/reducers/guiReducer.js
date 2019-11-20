@@ -46,21 +46,21 @@ const setViewSize = (state, action) => {
     viewSize: {
       root: {
         ...state.viewSize.root,
-        height: action.value.height,
-        width: action.value.width
+        height: action.payload.height,
+        width: action.payload.width
       },
       group: {
         ...state.viewSize.group,
-        height: action.value.height
+        height: action.payload.height
       },
       palette: {
         ...state.viewSize.palette,
-        height: action.value.height
+        height: action.payload.height
       },
       canvas: {
         ...state.viewSize.canvas,
-        height: action.value.height,
-        width: action.value.width - state.viewSize.canvas.offsetX
+        height: action.payload.height,
+        width: action.payload.width - state.viewSize.canvas.offsetX
       }
     }
   }
@@ -73,7 +73,7 @@ const setBlockInfo = (state, action) => {
       ...state.dragBlock,
       info: {
         ...state.dragBlock.info,
-        ...action.value
+        ...action.payload.value
       }
     }
   }
@@ -86,7 +86,7 @@ const setTrackingBlockRef = (state, action) => {
       ...state.dragBlock,
       ref: {
         ...state.dragBlock.ref,
-        ...action.value
+        ...action.payload.value
       }
     }
   }
