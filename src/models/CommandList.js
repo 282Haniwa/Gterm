@@ -1,4 +1,5 @@
 import { Record, List } from 'immutable'
+import RunnableUnit from './RunnableUnit'
 
 const defaultCommandListData = {
   commandList: List([])
@@ -9,20 +10,12 @@ const CommandListRecord = Record(defaultCommandListData)
 class CommandList extends CommandListRecord {
   constructor(commandList) {
     super({
-      commandList: List(commandList)
+      commandList: List(commandList.map(command => new RunnableUnit(command)))
     })
   }
 
   getItem(index) {
     return this.commandList.get(index)
-  }
-
-  toList() {
-    return this.commandList
-  }
-
-  toArray() {
-    return this.commandList.toArray()
   }
 
   push(command) {
@@ -44,6 +37,18 @@ class CommandList extends CommandListRecord {
 
   remove(index) {
     return this.set('commandList', this.commandList.remove(index))
+  }
+
+  toList() {
+    return this.commandList
+  }
+
+  toArray() {
+    return this.commandList.toArray()
+  }
+
+  toJS() {
+    return this.commandList.toJS()
   }
 }
 

@@ -1,18 +1,22 @@
-import { Record } from 'immutable'
+import CommandFactory from './CommandFactory'
 
 const defaultSpecialCommandData = {
   type: 'SpecialCommand',
   id: '',
   command: '',
-  info: {},
   pipe: {
     stdin: null,
     stdout: null,
     stderr: null
   },
+  info: {},
   content: []
 }
 
-const SpecialCommandRecord = Record(defaultSpecialCommandData)
+class SpecialCommand extends CommandFactory(defaultSpecialCommandData) {
+  toString() {
+    return `${this.command} ${this.info}`
+  }
+}
 
-export default SpecialCommandRecord
+export default SpecialCommand
