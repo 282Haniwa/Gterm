@@ -44,6 +44,48 @@ class RunnableUnit extends RunnableUnitRecord {
       commands: List(data.commands)
     })
   }
+
+  getCommand(index) {
+    return this.commandMap.get(this.commands.get(index))
+  }
+
+  getCommandById(id) {
+    return this.commandMap.get(id)
+  }
+
+  pushCommand(command) {
+    return this.merge({
+      commandMap: this.commandMap.set(command.id, commandSelector(command)),
+      commands: this.commands.push(command.id)
+    })
+  }
+
+  insertCommand(index, command) {
+    return this.merge({
+      commandMap: this.commandMap.set(command.id, commandSelector(command)),
+      commands: this.commands.insert(index, command.id)
+    })
+  }
+
+  moveCommand(index, to) {
+    const moveData = this.commands.get(index)
+    return this.set('commands', this.commands.remove(index).insert(to, moveData))
+  }
+
+  removeCommand(index) {
+    const command = this.getCommand(index)
+    return this.merge({
+      commandMap: this.commandMap.remove(command.id),
+      commands: this.commands.remove(index)
+    })
+  }
+
+  removeCommandById(id) {
+    return this.merge({
+      commandMap: this.commandMap.remove(id),
+      commands: this.commands.remove(this.commands.indexOf(id))
+    })
+  }
 }
 
 export default RunnableUnit

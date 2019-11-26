@@ -8,7 +8,7 @@ const defaultCommandListData = {
 const CommandListRecord = Record(defaultCommandListData)
 
 class CommandList extends CommandListRecord {
-  constructor(commandList) {
+  constructor(commandList = []) {
     super({
       commandList: List(commandList.map(command => new RunnableUnit(command)))
     })
@@ -18,25 +18,29 @@ class CommandList extends CommandListRecord {
     return this.commandList.get(index)
   }
 
-  push(command) {
+  pushItem(command) {
     return this.set('commandList', this.commandList.push(new RunnableUnit(command)))
   }
 
-  insert(index, command) {
+  insertItem(index, command) {
     return this.set('commandList', this.commandList.insert(index, new RunnableUnit(command)))
   }
 
-  move(index, to) {
+  moveItem(index, to) {
     const moveData = this.commandList.get(index)
     return this.set('commandList', this.commandList.remove(index).insert(to, moveData))
   }
 
-  update(index, command) {
-    return this.set('commandList', this.commandList.update(index, new RunnableUnit(command)))
+  setItem(index, command) {
+    return this.set('commandList', this.commandList.set(index, new RunnableUnit(command)))
   }
 
-  remove(index) {
+  removeItem(index) {
     return this.set('commandList', this.commandList.remove(index))
+  }
+
+  map(mapper) {
+    return this.commandList.map(mapper)
   }
 
   toList() {

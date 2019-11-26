@@ -1,46 +1,46 @@
 const key = 'commands'
 
 export const ActionTypes = {
-  ADD_COMMAND: `${key}/ADD_COMMAND`,
-  INSERT_COMMAND: `${key}/INSERT_COMMAND`,
-  MOVE_COMMAND: `${key}/MOVE_COMMAND`,
-  UPDATE_COMMAND: `${key}/UPDATE_COMMAND`,
-  REMOVE_COMMAND: `${key}/REMOVE_COMMAND`
+  PUSH_RUNNABLE_UNIT: `${key}/PUSH_RUNNABLE_UNIT`,
+  INSERT_RUNNABLE_UNIT: `${key}/INSERT_RUNNABLE_UNIT`,
+  MOVE_RUNNABLE_UNIT: `${key}/MOVE_RUNNABLE_UNIT`,
+  SET_RUNNABLE_UNIT: `${key}/SET_RUNNABLE_UNIT`,
+  REMOVE_RUNNABLE_UNIT: `${key}/REMOVE_RUNNABLE_UNIT`
 }
 
-export const addCommand = command => ({
-  type: ActionTypes.ADD_COMMAND,
+export const pushRunnableUnit = command => ({
+  type: ActionTypes.PUSH_RUNNABLE_UNIT,
   payload: {
     command: command
   }
 })
 
-export const insertCommand = (index, command) => ({
-  type: ActionTypes.INSERT_COMMAND,
+export const insertRunnableUnit = (index, command) => ({
+  type: ActionTypes.INSERT_RUNNABLE_UNIT,
   payload: {
     index: index,
     command: command
   }
 })
 
-export const moveCommand = (index, to) => ({
-  type: ActionTypes.MOVE_COMMAND,
+export const moveRunnableUnit = (index, to) => ({
+  type: ActionTypes.MOVE_RUNNABLE_UNIT,
   payload: {
     index: index,
     to: to
   }
 })
 
-export const updateCommand = (index, command) => ({
-  type: ActionTypes.UPDATE_COMMAND,
+export const setRunnableUnit = (index, command) => ({
+  type: ActionTypes.SET_RUNNABLE_UNIT,
   payload: {
     index: index,
     command: command
   }
 })
 
-export const removeCommand = index => ({
-  type: ActionTypes.REMOVE_COMMAND,
+export const removeRunnableUnit = index => ({
+  type: ActionTypes.REMOVE_RUNNABLE_UNIT,
   payload: {
     index: index
   }

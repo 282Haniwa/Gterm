@@ -7,47 +7,47 @@ const initialState = {
   commandList: new CommandList(commandList)
 }
 
-const addCommand = (state, action) => {
+const pushRunnableUnit = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.push(action.payload.command)
+    commandList: state.commandList.pushItem(action.payload.command)
   }
 }
 
-const insertCommand = (state, action) => {
+const insertRunnableUnit = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.insert(action.payload.index, action.payload.command)
+    commandList: state.commandList.insertItem(action.payload.index, action.payload.command)
   }
 }
 
-const moveCommand = (state, action) => {
+const moveRunnableUnit = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.move(action.payload.index, action.payload.to)
+    commandList: state.commandList.moveItem(action.payload.index, action.payload.to)
   }
 }
 
-const updateCommand = (state, action) => {
+const setRunnableUnit = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.update(action.payload.index, action.payload.command)
+    commandList: state.commandList.setItem(action.payload.index, action.payload.command)
   }
 }
 
-const removeCommand = (state, action) => {
+const removeRunnableUnit = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.remove(action.payload.index)
+    commandList: state.commandList.removeItem(action.payload.index)
   }
 }
 
 const actionMap = {
-  [ActionTypes.ADD_COMMAND]: addCommand,
-  [ActionTypes.INSERT_COMMAND]: insertCommand,
-  [ActionTypes.MOVE_COMMAND]: moveCommand,
-  [ActionTypes.UPDATE_COMMAND]: updateCommand,
-  [ActionTypes.REMOVE_COMMAND]: removeCommand
+  [ActionTypes.PUSH_RUNNABLE_UNIT]: pushRunnableUnit,
+  [ActionTypes.INSERT_RUNNABLE_UNIT]: insertRunnableUnit,
+  [ActionTypes.MOVE_RUNNABLE_UNIT]: moveRunnableUnit,
+  [ActionTypes.SET_RUNNABLE_UNIT]: setRunnableUnit,
+  [ActionTypes.REMOVE_RUNNABLE_UNIT]: removeRunnableUnit
 }
 
 const guiReducer = (state = initialState, action) => {

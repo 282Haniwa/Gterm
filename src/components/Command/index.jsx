@@ -4,9 +4,10 @@ import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
 import { blue } from '@material-ui/core/colors'
 import makeBlockDraggable from 'src/helper/makeBlockDraggable'
+import { NormalCommand, SpecialCommand } from 'src/models'
 
 const defaultData = {
-  type: 'Command',
+  type: 'NormalCommand',
   id: '',
   command: '',
   args: [],
@@ -26,7 +27,11 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     borderRadius: '5px',
     border: `solid 1px ${theme.palette.divider}`,
-    backgroundColor: blue[400]
+    backgroundColor: blue[400],
+    cursor: 'grab',
+    '&:active': {
+      cursor: 'grabbing'
+    }
   },
   command: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`,
@@ -52,17 +57,11 @@ const useStyles = makeStyles(theme => ({
 
 const propTypes = {
   className: PropTypes.string,
-  data: PropTypes.shape({
-    type: PropTypes.oneOf(['Command']),
-    id: PropTypes.string,
-    command: PropTypes.string,
-    args: PropTypes.arrayOf(PropTypes.string),
-    pipe: PropTypes.shape({
-      stdin: PropTypes.any,
-      stdout: PropTypes.any,
-      stderr: PropTypes.any
-    })
-  })
+  data: PropTypes.oneOfType([
+    PropTypes.instanceOf(NormalCommand),
+    PropTypes.instanceOf(SpecialCommand),
+    PropTypes.object
+  ])
 }
 
 const defaultProps = {

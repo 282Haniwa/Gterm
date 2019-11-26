@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
-import makeBlockDroppable from 'src/helper/makeBlockDroppable'
+import { pushRunnableUnit } from 'src/actions/commands'
 import CommandList from '../CommandList'
-import { commandList } from '../../mock'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,6 +30,15 @@ const defaultProps = {
 const Canvas = props => {
   const { className, height, width, ...other } = props
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const commandList = useSelector(state => state.commands.commandList)
+
+  const handlePushRunnableUnit = useCallback(
+    (event, data) => {
+      dispatch(pushRunnableUnit(data))
+    },
+    [dispatch]
+  )
 
   return (
     <div
@@ -40,7 +49,7 @@ const Canvas = props => {
       }}
       {...other}
     >
-      <CommandList data={commandList} />
+      <CommandList data={commandList} onBlockDrop={handlePushRunnableUnit} />
     </div>
   )
 }
@@ -48,4 +57,4 @@ const Canvas = props => {
 Canvas.propTypes = propTypes
 Canvas.defaultProps = defaultProps
 
-export default makeBlockDroppable(Canvas)
+export default Canvas

@@ -1,48 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
+import makeBlockDroppable from 'src/helper/makeBlockDroppable'
+import { RunnableUnit } from 'src/models'
 import Command from '../Command'
 
 const useStyles = makeStyles(
   theme => ({
     root: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       width: '100%',
-      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+      padding: `${theme.spacing(2)}px`,
       paddingRight: theme.spacing(8),
       borderBottom: `1px solid ${theme.palette.divider}`,
       boxSizing: 'border-box'
+    },
+    wrapper: {
+      display: 'flex',
+      flexDirection: 'row'
     }
   }),
   { name: 'RunnableUnit' }
 )
 
 const propTypes = {
-  data: PropTypes.shape({
-    type: PropTypes.oneOf(['RunnableUnit']),
-    id: PropTypes.string,
-    commandMap: PropTypes.object,
-    commands: PropTypes.arrayOf(PropTypes.string)
-  })
+  data: PropTypes.instanceOf(RunnableUnit)
 }
 
 const defaultProps = {}
 
-const RunnableUnit = props => {
-  const { data } = props
+const RunnableUnitComponent = props => {
+  const { data, ...other } = props
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      {data.commands.map(command => (
-        <Command data={data.commandMap[command]} key={command} />
-      ))}
+    <div className={classes.root} {...other}>
+      <div className={classes.wrapper}>
+        {data.commands.map(command => (
+          <Command data={data.commandMap.get(command)} key={command} />
+        ))}
+      </div>
     </div>
   )
 }
 
-RunnableUnit.propTypes = propTypes
-RunnableUnit.defaultProps = defaultProps
+RunnableUnitComponent.propTypes = propTypes
+RunnableUnitComponent.defaultProps = defaultProps
 
-export default RunnableUnit
+export default makeBlockDroppable(RunnableUnitComponent)
