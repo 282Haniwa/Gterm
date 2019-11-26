@@ -3,14 +3,14 @@ import { CommandList } from 'src/models'
 import { commandList } from 'src/mock'
 
 const initialState = {
-  // commandList: []
+  // commandList: new CommandList()
   commandList: new CommandList(commandList)
 }
 
 const addCommand = (state, action) => {
   return {
     ...state,
-    commandList: state.commandList.add(action.payload.command)
+    commandList: state.commandList.push(action.payload.command)
   }
 }
 

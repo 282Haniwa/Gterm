@@ -6,7 +6,7 @@ export const commandList = [
     commandMap: {
       commandId1: {
         id: 'commandId1',
-        type: 'Command',
+        type: 'NormalCommand',
         command: 'ls',
         args: ['-1'],
         pipe: {
@@ -17,7 +17,7 @@ export const commandList = [
       },
       commandId2: {
         id: 'commandId2',
-        type: 'Command',
+        type: 'NormalCommand',
         command: 'wc',
         args: ['-l'],
         pipe: {
@@ -35,7 +35,7 @@ export const commandList = [
     commandMap: {
       commandId3: {
         id: 'commandId3',
-        type: 'Command',
+        type: 'NormalCommand',
         command: 'ls',
         args: ['-1', '-a'],
         pipe: {
@@ -46,7 +46,7 @@ export const commandList = [
       },
       commandId4: {
         id: 'commandId4',
-        type: 'Command',
+        type: 'NormalCommand',
         command: 'wc',
         args: ['-l'],
         pipe: {
@@ -64,7 +64,7 @@ export const commandList = [
     commandMap: {
       commandId5: {
         id: 'commandId5',
-        type: 'Command',
+        type: 'NormalCommand',
         command: 'pwd',
         args: [],
         pipe: {

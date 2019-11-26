@@ -1,11 +1,12 @@
-import { Record, Map } from 'immutable'
+import { Record, Map, List } from 'immutable'
 import NormalCommand from './NormalCommand'
 import SpecialCommand from './SpecialCommand'
 
 const defaultRunnableUnitData = {
   type: 'RunnableUnit',
-  commandMap: {},
-  commands: []
+  id: '',
+  commandMap: Map(),
+  commands: List()
 }
 
 const RunnableUnitRecord = Record(defaultRunnableUnitData)
@@ -23,12 +24,24 @@ const commandSelector = data => {
 }
 
 class RunnableUnit extends RunnableUnitRecord {
-  constructor(runnableUnit) {
-    const data = runnableUnit.type === 'RunnableUnit' ? runnableUnit : {}
+  constructor(data) {
+    if (data.type === 'NormalCommand' || data.type === 'SpecialCommand') {
+      super({
+        type: 'RunnableUnit',
+        id: data.id,
+        commandMap: Map({
+          [data.id]: commandSelector(data)
+        }),
+        commands: List([data.id])
+      })
+      return
+    }
+
     super({
       type: 'RunnableUnit',
+      id: data.id,
       commandMap: Map(data.commandMap).map(value => commandSelector(value)),
-      commands: data.commands
+      commands: List(data.commands)
     })
   }
 }

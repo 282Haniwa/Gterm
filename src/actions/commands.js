@@ -16,7 +16,7 @@ export const addCommand = command => ({
 })
 
 export const insertCommand = (index, command) => ({
-  type: ActionTypes.ADD_COMMAND,
+  type: ActionTypes.INSERT_COMMAND,
   payload: {
     index: index,
     command: command
@@ -24,7 +24,7 @@ export const insertCommand = (index, command) => ({
 })
 
 export const moveCommand = (index, to) => ({
-  type: ActionTypes.ADD_COMMAND,
+  type: ActionTypes.MOVE_COMMAND,
   payload: {
     index: index,
     to: to
@@ -32,7 +32,7 @@ export const moveCommand = (index, to) => ({
 })
 
 export const updateCommand = (index, command) => ({
-  type: ActionTypes.ADD_COMMAND,
+  type: ActionTypes.UPDATE_COMMAND,
   payload: {
     index: index,
     command: command
@@ -40,7 +40,7 @@ export const updateCommand = (index, command) => ({
 })
 
 export const removeCommand = index => ({
-  type: ActionTypes.ADD_COMMAND,
+  type: ActionTypes.REMOVE_COMMAND,
   payload: {
     index: index
   }

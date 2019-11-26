@@ -19,11 +19,11 @@ class CommandList extends CommandListRecord {
   }
 
   push(command) {
-    return this.set('commandList', this.commandList.push(command))
+    return this.set('commandList', this.commandList.push(new RunnableUnit(command)))
   }
 
-  insert(command) {
-    return this.set('commandList', this.commandList.insert(command))
+  insert(index, command) {
+    return this.set('commandList', this.commandList.insert(index, new RunnableUnit(command)))
   }
 
   move(index, to) {
@@ -32,7 +32,7 @@ class CommandList extends CommandListRecord {
   }
 
   update(index, command) {
-    return this.set('commandList', this.commandList.update(index, command))
+    return this.set('commandList', this.commandList.update(index, new RunnableUnit(command)))
   }
 
   remove(index) {
