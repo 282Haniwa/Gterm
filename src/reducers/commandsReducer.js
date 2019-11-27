@@ -10,7 +10,7 @@ const initialState = {
 const setCommandList = (state, action) => {
   return {
     ...state,
-    commandList: action.payload.value
+    commandList: action.payload.value.clearGarbage()
   }
 }
 

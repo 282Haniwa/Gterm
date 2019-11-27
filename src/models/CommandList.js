@@ -39,6 +39,13 @@ class CommandList extends CommandListRecord {
     return this.set('commandList', this.commandList.remove(index))
   }
 
+  clearGarbage() {
+    return this.set(
+      'commandList',
+      this.commandList.filterNot(runnableUnit => runnableUnit.commands.isEmpty())
+    )
+  }
+
   map(mapper) {
     return this.commandList.map(mapper)
   }
