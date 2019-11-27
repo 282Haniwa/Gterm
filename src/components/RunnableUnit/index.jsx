@@ -43,7 +43,6 @@ const RunnableUnitComponent = props => {
   const { data: dataProp, onChange, ...other } = props
   const classes = useStyles()
   const [dragTarget, setDragTarget] = useState(null)
-  console.log('dataProp', dataProp.toJS())
 
   // const handleChange = useCallback(event => {
   //   setData(data)

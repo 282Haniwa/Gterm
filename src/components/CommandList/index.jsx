@@ -1,10 +1,7 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
 import makeStyles from '@material-ui/styles/makeStyles'
 import { orange } from '@material-ui/core/colors'
-import makeBlockDroppable from 'src/helper/makeBlockDroppable'
-import { pushRunnableUnit, insertRunnableUnit, setRunnableUnit } from 'src/actions/commands'
 import { CommandList } from 'src/models'
 import RunnableUnit from '../RunnableUnit'
 import DroppableZone from '../DroppableZone'
@@ -55,7 +52,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const propTypes = {
-  data: PropTypes.instanceOf(CommandList)
+  data: PropTypes.instanceOf(CommandList),
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
@@ -63,9 +61,8 @@ const defaultProps = {
 }
 
 const CommandListComponent = props => {
-  const { data: dataProp, ...other } = props
+  const { data: dataProp, onChange, ...other } = props
   const classes = useStyles()
-  const dispatch = useDispatch()
 
   const handleDragBlockEnterDroppableZone = useCallback(
     className => event => {
@@ -84,24 +81,30 @@ const CommandListComponent = props => {
   const handleInsertRunnableUnit = useCallback(
     index => (event, data) => {
       event.target.classList.remove(classes.droppableZoneOnBlockOver)
-      dispatch(insertRunnableUnit(index, data))
+      if (onChange) {
+        onChange(event, dataProp.insertItem(index, data))
+      }
     },
-    [classes.droppableZoneOnBlockOver, dispatch]
+    [classes.droppableZoneOnBlockOver, dataProp, onChange]
   )
 
   const handlePushRunnableUnit = useCallback(
     (event, data) => {
       event.target.classList.remove(classes.blackSpaceOnBlockOver)
-      dispatch(pushRunnableUnit(data))
+      if (onChange) {
+        onChange(event, dataProp.pushItem(data))
+      }
     },
-    [classes.blackSpaceOnBlockOver, dispatch]
+    [classes.blackSpaceOnBlockOver, dataProp, onChange]
   )
 
   const handleChangeRunnableCommand = useCallback(
     index => (event, data) => {
-      dispatch(setRunnableUnit(index, data))
+      if (onChange) {
+        onChange(event, dataProp.setItem(index, data))
+      }
     },
-    [dispatch]
+    [dataProp, onChange]
   )
 
   return (
@@ -130,4 +133,4 @@ const CommandListComponent = props => {
 CommandListComponent.propTypes = propTypes
 CommandListComponent.defaultProps = defaultProps
 
-export default makeBlockDroppable(CommandListComponent)
+export default CommandListComponent
