@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { forwardRef, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -11,7 +11,7 @@ const makeBlockDroppable = Component => {
     onBlockDrop: PropTypes.func
   }
 
-  const DroppableBlock = props => {
+  const DroppableBlock = forwardRef((props, ref) => {
     const {
       onBlockDragEnter,
       onBlockDragExit,
@@ -99,10 +99,11 @@ const makeBlockDroppable = Component => {
         onDragLeave={handleBlockDragLeave}
         onDragOver={handleBlockDragOver}
         onDrop={handleBlockDrop}
+        ref={ref}
         {...other}
       />
     )
-  }
+  })
 
   DroppableBlock.propTypes = propTypes
   DroppableBlock.displayName = `Block-Droppable-${Component.displayName || Component.name}`

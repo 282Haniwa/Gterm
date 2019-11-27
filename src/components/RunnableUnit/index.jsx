@@ -26,7 +26,8 @@ const useStyles = makeStyles(
       flexGrow: 0
     },
     afterList: {
-      flexGrow: 1
+      flexGrow: 1,
+      minWidth: theme.spacing(8)
     }
   }),
   { name: 'RunnableUnit' }
@@ -97,6 +98,20 @@ const RunnableUnitComponent = props => {
     [dataProp, dragTarget, onChange]
   )
 
+  const handleDropOnCommand = useCallback(
+    index => (event, data) => {
+      if (onChange) {
+        if (dataProp.commands.indexOf(data.id) === dragTarget) {
+          onChange(event, dataProp.moveCommand(dragTarget, index))
+          setDragTarget(null)
+          return
+        }
+        onChange(event, dataProp.insertCommand(index, data))
+      }
+    },
+    [dataProp, dragTarget, onChange]
+  )
+
   return (
     <div className={classes.root} {...other}>
       <DroppableZone className={classes.beforeList} onBlockDrop={handleDropBeforeList} />
@@ -106,6 +121,7 @@ const RunnableUnitComponent = props => {
             editable
             data={dataProp.commandMap.get(command)}
             key={command}
+            onBlockDrop={handleDropOnCommand(index)}
             onDragEnd={handleDragEnd(index)}
             onDragStart={handleDragStart(index)}
           />
