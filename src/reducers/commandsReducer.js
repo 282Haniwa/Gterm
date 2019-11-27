@@ -7,6 +7,13 @@ const initialState = {
   commandList: new CommandList(commandList)
 }
 
+const setCommandList = (state, action) => {
+  return {
+    ...state,
+    commandList: action.payload.value
+  }
+}
+
 const pushRunnableUnit = (state, action) => {
   return {
     ...state,
@@ -43,6 +50,7 @@ const removeRunnableUnit = (state, action) => {
 }
 
 const actionMap = {
+  [ActionTypes.SET_COMMAND_LIST]: setCommandList,
   [ActionTypes.PUSH_RUNNABLE_UNIT]: pushRunnableUnit,
   [ActionTypes.INSERT_RUNNABLE_UNIT]: insertRunnableUnit,
   [ActionTypes.MOVE_RUNNABLE_UNIT]: moveRunnableUnit,

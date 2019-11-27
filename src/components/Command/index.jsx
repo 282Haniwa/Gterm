@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useCallback } from 'react'
+import React, { forwardRef, useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     width: 'max-content',
     padding: theme.spacing(1),
-    marginRight: theme.spacing(1),
     borderRadius: '5px',
     border: `solid 1px ${theme.palette.divider}`,
     backgroundColor: blue[400],
@@ -51,7 +50,8 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: 'middle',
     textAlign: 'center',
     fontFamily: 'monaco, courier-new, courier, monospace',
-    fontSize: '1em'
+    fontSize: '1em',
+    backgroundColor: 'white'
   }
 }))
 
@@ -61,17 +61,19 @@ const propTypes = {
     PropTypes.instanceOf(NormalCommand),
     PropTypes.instanceOf(SpecialCommand),
     PropTypes.object
-  ])
+  ]),
+  editable: PropTypes.bool
 }
 
 const defaultProps = {
-  data: defaultData
+  data: defaultData,
+  editable: false
 }
 
 const Command = forwardRef((props, ref) => {
-  const { className, data, ...other } = props
+  const { className, data, editable, ...other } = props
   const classes = useStyles()
-  const [args, setArgs] = useState(data.args)
+  const [args, setArgs] = useState(data.args || [])
   const [inputValue, setInputValue] = useState({})
 
   const calcStringWidth = useCallback(text => {
@@ -113,11 +115,17 @@ const Command = forwardRef((props, ref) => {
     [calcStringWidth, args, inputValue.value]
   )
 
+  useEffect(() => {
+    if (editable && data.args) {
+      setArgs(data.args)
+    }
+  }, [data.args, editable])
+
   return (
     <div className={clsx(classes.root, className)} ref={ref} {...other}>
       <div className={classes.command}>{data.command}</div>
       <div className={classes.args}>
-        {args &&
+        {editable &&
           args.map((arg, index) => (
             <input
               className={classes.arg}
@@ -131,6 +139,18 @@ const Command = forwardRef((props, ref) => {
               }}
               type='text'
             />
+          ))}
+        {!editable &&
+          data.args.map(arg => (
+            <div
+              className={classes.arg}
+              key={`${data.command}-${arg}`}
+              style={{
+                width: calcStringWidth(arg)
+              }}
+            >
+              {arg}
+            </div>
           ))}
       </div>
     </div>

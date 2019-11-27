@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
-import { pushRunnableUnit } from 'src/actions/commands'
+import { setCommandList } from 'src/actions/commands'
 import CommandList from '../CommandList'
 
 const useStyles = makeStyles(() => ({
@@ -33,9 +33,9 @@ const Canvas = props => {
   const dispatch = useDispatch()
   const commandList = useSelector(state => state.commands.commandList)
 
-  const handlePushRunnableUnit = useCallback(
+  const handleChangeCommandList = useCallback(
     (event, data) => {
-      dispatch(pushRunnableUnit(data))
+      dispatch(setCommandList(data))
     },
     [dispatch]
   )
@@ -49,7 +49,7 @@ const Canvas = props => {
       }}
       {...other}
     >
-      <CommandList data={commandList} onBlockDrop={handlePushRunnableUnit} />
+      <CommandList data={commandList} onChange={handleChangeCommandList} />
     </div>
   )
 }

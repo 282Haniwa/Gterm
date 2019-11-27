@@ -6,7 +6,8 @@ import { makeStyles } from '@material-ui/styles'
 import Canvas from 'src/components/Canvas'
 import Group from 'src/components/Group'
 import Palette from 'src/components/Palette'
-import { setViewSize } from 'src/actions/gui'
+import Command from 'src/components/Command'
+import { setViewSize, setTrackingBlockRef } from 'src/actions/gui'
 import commands from 'src/resources/commands'
 
 const useStyles = makeStyles(theme => ({
@@ -23,6 +24,11 @@ const useStyles = makeStyles(theme => ({
   },
   canvas: {
     borderRight: `solid 1px ${theme.palette.divider}`
+  },
+  commandWrapper: {
+    position: 'absolute',
+    top: '-10000px',
+    left: '-10000px'
   }
 }))
 
@@ -34,9 +40,12 @@ const GUI = props => {
   const { className, ...other } = props
   const classes = useStyles()
   const rootRef = useRef(null)
+  const commandRef = useRef(null)
   const paletteRef = useRef(null)
   const dispatch = useDispatch()
-  const viewSize = useSelector(state => state.gui.viewSize)
+  const gui = useSelector(state => state.gui)
+  const { viewSize, dragBlock } = gui
+  console.log('gui.dragBlock.info', gui.dragBlock.info)
 
   const handleResize = useCallback(() => {
     dispatch(
@@ -48,8 +57,13 @@ const GUI = props => {
   }, [dispatch])
 
   const handleLoad = useCallback(() => {
+    dispatch(
+      setTrackingBlockRef({
+        command: commandRef
+      })
+    )
     handleResize()
-  }, [handleResize])
+  }, [dispatch, handleResize])
 
   useEffect(() => {
     handleLoad()
@@ -82,6 +96,9 @@ const GUI = props => {
           height={viewSize.canvas.height}
           width={viewSize.canvas.width}
         />
+        <div className={classes.commandWrapper}>
+          <Command data={dragBlock.info.data} ref={commandRef} />
+        </div>
       </div>
     </>
   )

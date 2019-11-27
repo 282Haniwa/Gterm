@@ -1,12 +1,20 @@
 const key = 'commands'
 
 export const ActionTypes = {
+  SET_COMMAND_LIST: `${key}/SET_COMMAND_LIST`,
   PUSH_RUNNABLE_UNIT: `${key}/PUSH_RUNNABLE_UNIT`,
   INSERT_RUNNABLE_UNIT: `${key}/INSERT_RUNNABLE_UNIT`,
   MOVE_RUNNABLE_UNIT: `${key}/MOVE_RUNNABLE_UNIT`,
   SET_RUNNABLE_UNIT: `${key}/SET_RUNNABLE_UNIT`,
   REMOVE_RUNNABLE_UNIT: `${key}/REMOVE_RUNNABLE_UNIT`
 }
+
+export const setCommandList = commandList => ({
+  type: ActionTypes.SET_COMMAND_LIST,
+  payload: {
+    value: commandList
+  }
+})
 
 export const pushRunnableUnit = command => ({
   type: ActionTypes.PUSH_RUNNABLE_UNIT,

@@ -1,5 +1,6 @@
 import { ActionTypes } from 'src/actions/gui'
 import { ui } from 'src/static'
+import { NormalCommand } from 'src/models'
 
 const initialState = {
   viewSize: {
@@ -35,7 +36,7 @@ const initialState = {
     },
     info: {
       isDragged: false,
-      data: null
+      data: new NormalCommand()
     }
   }
 }
@@ -67,13 +68,15 @@ const setViewSize = (state, action) => {
 }
 
 const setBlockInfo = (state, action) => {
+  const data = action.payload.value.data || new NormalCommand()
   return {
     ...state,
     dragBlock: {
       ...state.dragBlock,
       info: {
         ...state.dragBlock.info,
-        ...action.payload.value
+        ...action.payload.value,
+        data: data
       }
     }
   }

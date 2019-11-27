@@ -4,18 +4,22 @@ import { useDispatch } from 'react-redux'
 import makeStyles from '@material-ui/styles/makeStyles'
 import { orange } from '@material-ui/core/colors'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
-import { insertRunnableUnit, setRunnableUnit } from 'src/actions/commands'
+import { pushRunnableUnit, insertRunnableUnit, setRunnableUnit } from 'src/actions/commands'
 import { CommandList } from 'src/models'
 import RunnableUnit from '../RunnableUnit'
+import DroppableZone from '../DroppableZone'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: 'flex',
+    flexDirection: 'column',
     width: 'fit-content',
     minWidth: '100%',
     height: '100%'
   },
   wrapper: {
-    position: 'relative'
+    position: 'relative',
+    flexGrow: 0
   },
   droppableZone: {
     position: 'absolute',
@@ -32,6 +36,21 @@ const useStyles = makeStyles(theme => ({
       width: '100%',
       backgroundColor: orange[200]
     }
+  },
+  blackSpace: {
+    position: 'relative',
+    flexGrow: 1,
+    minHeight: theme.spacing(8)
+  },
+  blackSpaceOnBlockOver: {
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      top: '-3px',
+      height: '6px',
+      width: '100%',
+      backgroundColor: orange[200]
+    }
   }
 }))
 
@@ -43,33 +62,23 @@ const defaultProps = {
   data: new CommandList()
 }
 
-const DroppableZone = makeBlockDroppable(props => <div {...props} />)
-
 const CommandListComponent = props => {
   const { data: dataProp, ...other } = props
   const classes = useStyles()
   const dispatch = useDispatch()
 
   const handleDragBlockEnterDroppableZone = useCallback(
-    event => {
-      event.target.classList.add(classes.droppableZoneOnBlockOver)
+    className => event => {
+      event.target.classList.add(className)
     },
-    [classes.droppableZoneOnBlockOver]
+    []
   )
 
   const handleDragBlockLeaveDroppableZone = useCallback(
-    event => {
-      event.target.classList.remove(classes.droppableZoneOnBlockOver)
+    className => event => {
+      event.target.classList.remove(className)
     },
-    [classes.droppableZoneOnBlockOver]
-  )
-
-  const handlePushCommand = useCallback(
-    index => (event, data) => {
-      const anRunnableUnit = dataProp.getItem(index)
-      dispatch(setRunnableUnit(index, anRunnableUnit.pushCommand(data)))
-    },
-    [dataProp, dispatch]
+    []
   )
 
   const handleInsertRunnableUnit = useCallback(
@@ -80,19 +89,40 @@ const CommandListComponent = props => {
     [classes.droppableZoneOnBlockOver, dispatch]
   )
 
+  const handlePushRunnableUnit = useCallback(
+    (event, data) => {
+      event.target.classList.remove(classes.blackSpaceOnBlockOver)
+      dispatch(pushRunnableUnit(data))
+    },
+    [classes.blackSpaceOnBlockOver, dispatch]
+  )
+
+  const handleChangeRunnableCommand = useCallback(
+    index => (event, data) => {
+      dispatch(setRunnableUnit(index, data))
+    },
+    [dispatch]
+  )
+
   return (
     <div className={classes.root} {...other}>
       {dataProp.map((command, index) => (
         <div className={classes.wrapper} key={`${command.id}`}>
           <DroppableZone
             className={classes.droppableZone}
-            onBlockDragEnter={handleDragBlockEnterDroppableZone}
-            onBlockDragLeave={handleDragBlockLeaveDroppableZone}
+            onBlockDragEnter={handleDragBlockEnterDroppableZone(classes.droppableZoneOnBlockOver)}
+            onBlockDragLeave={handleDragBlockLeaveDroppableZone(classes.droppableZoneOnBlockOver)}
             onBlockDrop={handleInsertRunnableUnit(index)}
           />
-          <RunnableUnit data={command} onBlockDrop={handlePushCommand(index)} />
+          <RunnableUnit data={command} onChange={handleChangeRunnableCommand(index)} />
         </div>
       ))}
+      <DroppableZone
+        className={classes.blackSpace}
+        onBlockDragEnter={handleDragBlockEnterDroppableZone(classes.blackSpaceOnBlockOver)}
+        onBlockDragLeave={handleDragBlockLeaveDroppableZone(classes.blackSpaceOnBlockOver)}
+        onBlockDrop={handlePushRunnableUnit}
+      />
     </div>
   )
 }

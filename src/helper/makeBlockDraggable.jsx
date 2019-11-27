@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setBlockInfo } from 'src/actions/gui'
 import PropTypes from 'prop-types'
 
@@ -17,9 +17,15 @@ const makeBlockDraggable = Component => {
   const DraggableBlock = forwardRef((props, ref) => {
     const { data, onDragEnd, onDragStart, ...other } = props
     const dispatch = useDispatch()
+    const dragBlockRef = useSelector(state => state.gui.dragBlock.ref)
     const handleDragStart = useCallback(
       event => {
         console.log('handleDragStart', { ...event })
+        event.dataTransfer.setDragImage(
+          dragBlockRef.command.current,
+          event.nativeEvent.offsetX,
+          event.nativeEvent.offsetY
+        )
         dispatch(
           setBlockInfo({
             isDragged: true,
@@ -30,7 +36,7 @@ const makeBlockDraggable = Component => {
           onDragStart(event)
         }
       },
-      [dispatch, data, onDragStart]
+      [dragBlockRef.command, dispatch, data, onDragStart]
     )
 
     const handleDragEnd = useCallback(
