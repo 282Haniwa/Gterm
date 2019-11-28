@@ -45,7 +45,6 @@ const GUI = props => {
   const dispatch = useDispatch()
   const gui = useSelector(state => state.gui)
   const { viewSize, dragBlock } = gui
-  console.log('gui.dragBlock.info', gui.dragBlock.info)
 
   const handleResize = useCallback(() => {
     dispatch(

@@ -20,7 +20,7 @@ const makeBlockDraggable = Component => {
     const dragBlockRef = useSelector(state => state.gui.dragBlock.ref)
     const handleDragStart = useCallback(
       event => {
-        console.log('handleDragStart', { ...event })
+        // console.log('handleDragStart', { ...event })
         event.dataTransfer.setDragImage(
           dragBlockRef.command.current,
           event.nativeEvent.offsetX,
@@ -41,7 +41,7 @@ const makeBlockDraggable = Component => {
 
     const handleDragEnd = useCallback(
       event => {
-        console.log('handleDragEnd', { ...event })
+        // console.log('handleDragEnd', { ...event })
         dispatch(
           setBlockInfo({
             isDragged: false,

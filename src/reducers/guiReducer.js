@@ -68,7 +68,6 @@ const setViewSize = (state, action) => {
 }
 
 const setBlockInfo = (state, action) => {
-  console.log('setBlockInfo', new NormalCommand(action.payload.value.data))
   const data = new NormalCommand(action.payload.value.data)
   return {
     ...state,
