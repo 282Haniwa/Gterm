@@ -1,7 +1,7 @@
 import CommandFactory from './CommandFactory'
 
 const defaultNormalCommandData = {
-  type: 'Command',
+  type: 'NormalCommand',
   id: '',
   command: '',
   pipe: {

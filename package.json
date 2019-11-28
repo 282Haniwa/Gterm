@@ -30,6 +30,7 @@
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.3",
+    "uuid": "^3.3.3",
     "xterm": "^4.1.0",
     "xterm-addon-fit": "^0.2.1"
   },

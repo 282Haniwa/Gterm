@@ -18,12 +18,12 @@ class CommandList extends CommandListRecord {
     return this.commandList.get(index)
   }
 
-  pushItem(command) {
-    return this.set('commandList', this.commandList.push(new RunnableUnit(command)))
+  pushItem(data) {
+    return this.set('commandList', this.commandList.push(new RunnableUnit(data)))
   }
 
-  insertItem(index, command) {
-    return this.set('commandList', this.commandList.insert(index, new RunnableUnit(command)))
+  insertItem(index, data) {
+    return this.set('commandList', this.commandList.insert(index, new RunnableUnit(data)))
   }
 
   moveItem(index, to) {
@@ -31,8 +31,8 @@ class CommandList extends CommandListRecord {
     return this.set('commandList', this.commandList.remove(index).insert(to, moveData))
   }
 
-  setItem(index, command) {
-    return this.set('commandList', this.commandList.set(index, new RunnableUnit(command)))
+  setItem(index, data) {
+    return this.set('commandList', this.commandList.set(index, new RunnableUnit(data)))
   }
 
   removeItem(index) {

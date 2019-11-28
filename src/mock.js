@@ -1,69 +1,72 @@
+import uuidv4 from 'uuid/v4'
+
+const commandIDArray = Array.from(new Array(5), () => uuidv4())
 // eslint-disable-next-line import/prefer-default-export
 export const commandList = [
   {
     type: 'RunnableUnit',
-    id: 'RunnableUnit1',
+    id: uuidv4(),
     commandMap: {
-      commandId1: {
-        id: 'commandId1',
+      [commandIDArray[0]]: {
+        id: commandIDArray[0],
         type: 'NormalCommand',
         command: 'ls',
         args: ['-1'],
         pipe: {
           stdin: null,
-          stdout: 'commandId2',
+          stdout: commandIDArray[1],
           stderr: null
         }
       },
-      commandId2: {
-        id: 'commandId2',
+      [commandIDArray[1]]: {
+        id: commandIDArray[1],
         type: 'NormalCommand',
         command: 'wc',
         args: ['-l'],
         pipe: {
-          stdin: 'commandId1',
+          stdin: commandIDArray[0],
           stdout: null,
           stderr: null
         }
       }
     },
-    commands: ['commandId1', 'commandId2']
+    commands: [commandIDArray[0], commandIDArray[1]]
   },
   {
     type: 'RunnableUnit',
-    id: 'RunnableUnit2',
+    id: uuidv4(),
     commandMap: {
-      commandId3: {
-        id: 'commandId3',
+      [commandIDArray[2]]: {
+        id: commandIDArray[2],
         type: 'NormalCommand',
         command: 'ls',
         args: ['-1', '-a'],
         pipe: {
           stdin: null,
-          stdout: 'commandId4',
+          stdout: commandIDArray[3],
           stderr: null
         }
       },
-      commandId4: {
-        id: 'commandId4',
+      [commandIDArray[3]]: {
+        id: commandIDArray[3],
         type: 'NormalCommand',
         command: 'wc',
         args: ['-l'],
         pipe: {
-          stdin: 'commandId3',
+          stdin: commandIDArray[2],
           stdout: null,
           stderr: null
         }
       }
     },
-    commands: ['commandId3', 'commandId4']
+    commands: [commandIDArray[2], commandIDArray[3]]
   },
   {
     type: 'RunnableUnit',
-    id: 'RunnableUnit3',
+    id: uuidv4(),
     commandMap: {
-      commandId5: {
-        id: 'commandId5',
+      [commandIDArray[4]]: {
+        id: commandIDArray[4],
         type: 'NormalCommand',
         command: 'pwd',
         args: [],
@@ -74,6 +77,6 @@ export const commandList = [
         }
       }
     },
-    commands: ['commandId5']
+    commands: [commandIDArray[4]]
   }
 ]

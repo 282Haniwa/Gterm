@@ -1,4 +1,5 @@
 import { Record, Map, List } from 'immutable'
+import uuidv4 from 'uuid/v4'
 import NormalCommand from './NormalCommand'
 import SpecialCommand from './SpecialCommand'
 
@@ -25,23 +26,43 @@ const commandSelector = data => {
 
 class RunnableUnit extends RunnableUnitRecord {
   constructor(data) {
-    if (data.type === 'NormalCommand' || data.type === 'SpecialCommand') {
+    if (Record.isRecord(data)) {
+      if (data.type === 'NormalCommand' || data.type === 'SpecialCommand') {
+        const aCommand = commandSelector(data)
+        super({
+          type: 'RunnableUnit',
+          id: uuidv4(),
+          commandMap: Map({
+            [aCommand.id]: aCommand
+          }),
+          commands: List([data.id])
+        })
+        return
+      }
+    }
+
+    const idMap = {}
+    const entries = Map(data.commandMap).mapEntries(entry => {
+      const aCommand = commandSelector(entry[1])
+      idMap[entry[0]] = aCommand.id
+      return [aCommand.id, aCommand]
+    })
+
+    if (Record.isRecord(data)) {
       super({
         type: 'RunnableUnit',
         id: data.id,
-        commandMap: Map({
-          [data.id]: commandSelector(data)
-        }),
-        commands: List([data.id])
+        commandMap: Map(entries),
+        commands: List(data.commands).map(id => idMap[id])
       })
       return
     }
 
     super({
       type: 'RunnableUnit',
-      id: data.id,
-      commandMap: Map(data.commandMap).map(value => commandSelector(value)),
-      commands: List(data.commands)
+      id: uuidv4(),
+      commandMap: Map(entries),
+      commands: List(data.commands).map(id => idMap[id])
     })
   }
 
@@ -55,14 +76,14 @@ class RunnableUnit extends RunnableUnitRecord {
 
   pushCommand(command) {
     return this.merge({
-      commandMap: this.commandMap.set(command.id, commandSelector(command)),
+      commandMap: this.commandMap.set(command.id, command),
       commands: this.commands.push(command.id)
     })
   }
 
   insertCommand(index, command) {
     return this.merge({
-      commandMap: this.commandMap.set(command.id, commandSelector(command)),
+      commandMap: this.commandMap.set(command.id, command),
       commands: this.commands.insert(index, command.id)
     })
   }
