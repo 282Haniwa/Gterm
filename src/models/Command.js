@@ -21,10 +21,11 @@ const CommandRecord = Record(defaultCommandData)
 class Command extends CommandRecord {
   constructor(data) {
     if (Command.isCommand(data)) {
-      super({
-        ...data,
-        pipe: new Pipe(data.pipe, { prev: data.existence.prev, next: data.existence.next })
-      })
+      super(
+        data.merge({
+          pipe: new Pipe(data.pipe, { prev: data.existence.prev, next: data.existence.next })
+        })
+      )
       return
     }
     super({
@@ -39,6 +40,16 @@ class Command extends CommandRecord {
 
   static isCommand(object) {
     return object instanceof Command
+  }
+
+  updateExistence({ prev, next } = { prev: false, next: false }) {
+    return this.merge({
+      existence: {
+        prev: prev,
+        next: next
+      },
+      pipe: this.pipe.resetSelected({ prev: prev, next: next })
+    })
   }
 
   toString() {

@@ -75,6 +75,19 @@ class Pipe extends PipeRecord {
     return object instanceof Pipe
   }
 
+  resetSelected({ prev, next } = { prev: false, next: false }) {
+    const stdin = prev ? new PipeData({ selected: 'prev' }) : new PipeData({ selected: 'terminal' })
+    const stdout = next
+      ? new PipeData({ selected: 'next' })
+      : new PipeData({ selected: 'terminal' })
+    const stderr = new PipeData({ selected: 'terminal' })
+    return this.merge({
+      stdin: stdin,
+      stdout: stdout,
+      stderr: stderr
+    })
+  }
+
   toString({ stdin = false, stdout = false, stderr = false }) {
     if (this.other) {
       return this.other

@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
 import { blue } from '@material-ui/core/colors'
 import makeBlockDraggable from 'src/helper/makeBlockDraggable'
-import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import { NormalCommand, SpecialCommand } from 'src/models'
 
 const defaultData = {
@@ -163,4 +162,4 @@ Command.defaultProps = defaultProps
 
 export { defaultData as defaultCommandData }
 
-export default makeBlockDroppable(makeBlockDraggable(Command))
+export default makeBlockDraggable(Command)

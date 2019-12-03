@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
@@ -76,22 +76,22 @@ const PipeComponent = props => {
   const { className, data: dataProp, first, middle, last, onChange, ...other } = props
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [selfInputMode, setSelfInputMode] = useState(false)
-  const [selfInputString, setSelfInputString] = useState('')
+  const [selfInputMode, setSelfInputMode] = useState(Boolean(dataProp.other))
+  const [selfInputString, setSelfInputString] = useState(dataProp.other)
   const [selectValues, setSelectValues] = useState({
     stdin: dataProp.stdin.selected,
     stdout: dataProp.stdout.selected,
     stderr: dataProp.stderr.selected
   })
   const [fileNames, setFileNames] = useState({
-    stdin: '',
-    stdout: '',
-    stderr: ''
+    stdin: dataProp.stdin.fileName,
+    stdout: dataProp.stdout.fileName,
+    stderr: dataProp.stderr.fileName
   })
   const [appendingSwitchValues, setAppendingSwitchValues] = useState({
-    stdin: false,
-    stdout: false,
-    stderr: false
+    stdin: dataProp.stdin.appending,
+    stdout: dataProp.stdout.appending,
+    stderr: dataProp.stderr.appending
   })
   const open = Boolean(anchorEl)
 
@@ -158,6 +158,28 @@ const PipeComponent = props => {
   const handleChangeSelfInputString = useCallback(event => {
     setSelfInputString(event.target.value)
   }, [])
+
+  useEffect(() => {
+    if (dataProp) {
+      setSelfInputMode(Boolean(dataProp.other))
+      setSelfInputString(dataProp.other)
+      setSelectValues({
+        stdin: dataProp.stdin.selected,
+        stdout: dataProp.stdout.selected,
+        stderr: dataProp.stderr.selected
+      })
+      setFileNames({
+        stdin: dataProp.stdin.fileName,
+        stdout: dataProp.stdout.fileName,
+        stderr: dataProp.stderr.fileName
+      })
+      setAppendingSwitchValues({
+        stdin: dataProp.stdin.appending,
+        stdout: dataProp.stdout.appending,
+        stderr: dataProp.stderr.appending
+      })
+    }
+  }, [dataProp])
 
   return (
     <div className={clsx(classes.root, className)} {...other}>

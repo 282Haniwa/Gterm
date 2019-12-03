@@ -1,13 +1,11 @@
 import { Record } from 'immutable'
 import uuidv4 from 'uuid/v4'
-import path from 'path'
 
 const defaultPipeDataUnitData = {
   type: 'PipeData',
   id: '',
   selected: 'terminal',
-  path: '',
-  name: '',
+  filename: '',
   appending: false,
   string: ''
 }
@@ -29,18 +27,16 @@ class PipeData extends PipeDataRecord {
   }
 
   setFile(fileName, appending = false) {
-    const file = path.parse(fileName)
     return this.merge({
       selected: 'file',
-      path: file.dir,
-      name: file.base,
+      filename: fileName,
       appending: appending
     })
   }
 
   toString() {
     if (this.selected === 'file') {
-      return `${this.path}/${this.name}`
+      return this.fileName
     }
     return ''
   }
