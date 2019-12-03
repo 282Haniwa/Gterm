@@ -5,6 +5,7 @@ import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import { RunnableUnit } from 'src/models'
 import Command from '../Command'
 import DroppableZone from '../DroppableZone'
+import Pipe from '../Pipe'
 
 const useStyles = makeStyles(
   theme => ({
@@ -17,6 +18,11 @@ const useStyles = makeStyles(
       boxSizing: 'border-box'
     },
     wrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexGrow: 0
+    },
+    commandWrapper: {
       display: 'flex',
       flexDirection: 'row',
       flexGrow: 0
@@ -112,20 +118,41 @@ const RunnableUnitComponent = props => {
     [dataProp, dragTarget, onChange]
   )
 
+  const handleChangePipe = useCallback(
+    index => (event, value) => {
+      const aCommand = dataProp.getCommand(index).set('pipe', value)
+      onChange(event, dataProp.updateCommand(aCommand))
+    },
+    [dataProp, onChange]
+  )
+
   return (
     <div className={classes.root} {...other}>
       <DroppableZone className={classes.beforeList} onBlockDrop={handleDropBeforeList} />
       <div className={classes.wrapper}>
-        {dataProp.commands.map((command, index) => (
-          <Command
-            editable
-            data={dataProp.commandMap.get(command)}
-            key={command}
-            onBlockDrop={handleDropOnCommand(index)}
-            onDragEnd={handleDragEnd(index)}
-            onDragStart={handleDragStart(index)}
-          />
-        ))}
+        {dataProp.commands.map((command, index) => {
+          const aCommand = dataProp.commandMap.get(command)
+          const isFirst = index === 0
+          const isLast = index === dataProp.commands.size - 1
+          return (
+            <DroppableZone
+              className={classes.commandWrapper}
+              key={command}
+              onBlockDrop={handleDropOnCommand(index)}
+              onDragEnd={handleDragEnd(index)}
+              onDragStart={handleDragStart(index)}
+            >
+              {isFirst && <Pipe first data={aCommand.pipe} onChange={handleChangePipe(index)} />}
+              <Command editable data={aCommand} />
+              <Pipe
+                data={aCommand.pipe}
+                last={isLast}
+                middle={!isLast}
+                onChange={handleChangePipe(index)}
+              />
+            </DroppableZone>
+          )
+        })}
       </div>
       <DroppableZone className={classes.afterList} onBlockDrop={handleDropAfterList} />
     </div>

@@ -1,18 +1,13 @@
-import CommandFactory from './CommandFactory'
+import Command from './Command'
 
-const defaultNormalCommandData = {
-  type: 'NormalCommand',
-  id: '',
-  command: '',
-  pipe: {
-    stdin: null,
-    stdout: null,
-    stderr: null
-  },
-  args: []
-}
+class NormalCommand extends Command {
+  constructor(data) {
+    super({
+      ...data,
+      type: 'NormalCommand'
+    })
+  }
 
-class NormalCommand extends CommandFactory(defaultNormalCommandData) {
   toString() {
     return `${this.command} ${this.args.join(' ')}`
   }

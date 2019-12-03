@@ -1,19 +1,13 @@
-import CommandFactory from './CommandFactory'
+import Command from './Command'
 
-const defaultSpecialCommandData = {
-  type: 'SpecialCommand',
-  id: '',
-  command: '',
-  pipe: {
-    stdin: null,
-    stdout: null,
-    stderr: null
-  },
-  info: {},
-  content: []
-}
+class SpecialCommand extends Command {
+  constructor(data) {
+    super({
+      ...data,
+      type: 'SpecialCommand'
+    })
+  }
 
-class SpecialCommand extends CommandFactory(defaultSpecialCommandData) {
   toString() {
     return `${this.command} ${this.info}`
   }

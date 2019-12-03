@@ -1,5 +1,6 @@
 import { Record, Map, List } from 'immutable'
 import uuidv4 from 'uuid/v4'
+import Command from './Command'
 import NormalCommand from './NormalCommand'
 import SpecialCommand from './SpecialCommand'
 
@@ -13,6 +14,10 @@ const defaultRunnableUnitData = {
 const RunnableUnitRecord = Record(defaultRunnableUnitData)
 
 const commandSelector = data => {
+  if (Command.isCommand(data)) {
+    return data
+  }
+
   if (data.type === 'NormalCommand') {
     return new NormalCommand(data)
   }
@@ -26,7 +31,7 @@ const commandSelector = data => {
 
 class RunnableUnit extends RunnableUnitRecord {
   constructor(data) {
-    if (Record.isRecord(data)) {
+    if (Command.isCommand(data)) {
       if (data.type === 'NormalCommand' || data.type === 'SpecialCommand') {
         const aCommand = commandSelector(data)
         super({
@@ -48,7 +53,7 @@ class RunnableUnit extends RunnableUnitRecord {
       return [aCommand.id, aCommand]
     })
 
-    if (Record.isRecord(data)) {
+    if (RunnableUnit.isRunnableUnit(data)) {
       super({
         type: 'RunnableUnit',
         id: data.id,
@@ -64,6 +69,10 @@ class RunnableUnit extends RunnableUnitRecord {
       commandMap: Map(entries),
       commands: List(data.commands).map(id => idMap[id])
     })
+  }
+
+  static isRunnableUnit(object) {
+    return object instanceof RunnableUnit
   }
 
   getCommand(index) {
@@ -86,6 +95,10 @@ class RunnableUnit extends RunnableUnitRecord {
       commandMap: this.commandMap.set(command.id, command),
       commands: this.commands.insert(index, command.id)
     })
+  }
+
+  updateCommand(command) {
+    return this.set('commandMap', this.commandMap.set(command.id, command))
   }
 
   moveCommand(index, to) {
