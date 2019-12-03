@@ -26,25 +26,25 @@ const redirectSymbol = data => (data.appending ? '>>' : '>')
  */
 const outputPipeStringMap = {
   next: {
-    next: () => ' &| ',
-    terminal: () => ' | ',
-    file: (stdout, stderr) => ` 2${redirectSymbol(stderr)} ${stderr.toString()} | `
+    next: () => '&|',
+    terminal: () => '|',
+    file: (stdout, stderr) => `2${redirectSymbol(stderr)} ${stderr.toString()} |`
   },
   terminal: {
     // あまりよくはない(stdoutをターミナルに出して、stderrを使うuse caseはまずないはず)
-    next: () => ' 3>&1 1>&2 2>&3 | ',
+    next: () => '3>&1 1>&2 2>&3 |',
     // 最後のコマンドの時のみ
     terminal: () => '',
     // あまりよくはない(stdoutをターミナルに出して、stderrを使うuse caseはまずないはず)
-    file: stdout => ` 1>&2 2${redirectSymbol(stdout)} ${stdout.toString()} | `
+    file: stdout => `1>&2 2${redirectSymbol(stdout)} ${stdout.toString()} |`
   },
   file: {
-    next: stdout => ` 2>&1 ${redirectSymbol(stdout)} ${stdout.toString()} | `,
+    next: stdout => `2>&1 ${redirectSymbol(stdout)} ${stdout.toString()} |`,
     // 最後のコマンドの時のみ
-    terminal: stdout => ` ${redirectSymbol(stdout)} ${stdout.toString()}`,
+    terminal: stdout => `${redirectSymbol(stdout)} ${stdout.toString()}`,
     // 最後のコマンドの時のみ
     // eslint-disable-next-line prettier/prettier
-    file: (stdout, stderr) => ` ${redirectSymbol(stdout)} ${stdout.toString()} 2${redirectSymbol(stderr)} ${stderr.toString()}`
+    file: (stdout, stderr) => `${redirectSymbol(stdout)} ${stdout.toString()} 2${redirectSymbol(stderr)} ${stderr.toString()}`
   }
 }
 
@@ -82,14 +82,14 @@ class Pipe extends PipeRecord {
 
     let str = ''
     if (stdin && inputPipeStringMap[this.stdin.selected]) {
-      str = `${inputPipeStringMap[this.stdin.selected](this.stdin)}`
+      str = `${inputPipeStringMap[this.stdin.selected](this.stdin)} `
     }
     if (stdout && stderr) {
       const pipeString = outputPipeStringMap[this.stdout.selected][this.stderr.selected](
         this.stdout,
         this.stderr
       )
-      return `${str} ${pipeString}`
+      return `${str}${pipeString}`
     }
     return str
   }

@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
+import { green } from '@material-ui/core/colors'
+import IconButton from '@material-ui/core/IconButton'
+import { PlayArrow } from '@material-ui/icons'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import { RunnableUnit } from 'src/models'
 import Command from '../Command'
@@ -34,6 +37,9 @@ const useStyles = makeStyles(
     afterList: {
       flexGrow: 1,
       minWidth: theme.spacing(8)
+    },
+    runButton: {
+      color: green[400]
     }
   }),
   { name: 'RunnableUnit' }
@@ -48,7 +54,6 @@ const defaultProps = {}
 
 const RunnableUnitComponent = props => {
   const { data: dataProp, onChange, ...other } = props
-  console.log(dataProp, dataProp.toJS())
   const classes = useStyles()
   const [dragTarget, setDragTarget] = useState(null)
 
@@ -127,9 +132,17 @@ const RunnableUnitComponent = props => {
     [dataProp, onChange]
   )
 
+  const handleClickRunButton = useCallback(() => {
+    console.log(dataProp.toString())
+  }, [dataProp])
+
   return (
     <div className={classes.root} {...other}>
-      <DroppableZone className={classes.beforeList} onBlockDrop={handleDropBeforeList} />
+      <DroppableZone className={classes.beforeList} onBlockDrop={handleDropBeforeList}>
+        <IconButton className={classes.runButton} onClick={handleClickRunButton}>
+          <PlayArrow />
+        </IconButton>
+      </DroppableZone>
       <div className={classes.wrapper}>
         {dataProp.commands.map((command, index) => {
           const aCommand = dataProp.commandMap.get(command)

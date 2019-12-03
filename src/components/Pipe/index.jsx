@@ -94,7 +94,6 @@ const PipeComponent = props => {
     stderr: false
   })
   const open = Boolean(anchorEl)
-  console.log(dataProp.toJS())
 
   const handleClick = useCallback(event => {
     setAnchorEl(event.currentTarget)

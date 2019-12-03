@@ -43,8 +43,9 @@ class Command extends CommandRecord {
 
   toString() {
     return `${this.command} ${this.pipe.toString({
-      prev: this.existence.prev,
-      next: this.existence.next
+      stdin: this.existence.prev,
+      stdout: this.existence.next,
+      stderr: this.existence.next
     })}`
   }
 }
