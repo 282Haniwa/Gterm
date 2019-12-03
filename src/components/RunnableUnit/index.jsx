@@ -48,6 +48,7 @@ const defaultProps = {}
 
 const RunnableUnitComponent = props => {
   const { data: dataProp, onChange, ...other } = props
+  console.log(dataProp, dataProp.toJS())
   const classes = useStyles()
   const [dragTarget, setDragTarget] = useState(null)
 

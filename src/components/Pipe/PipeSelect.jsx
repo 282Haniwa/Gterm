@@ -28,7 +28,7 @@ const PipeSelect = props => {
       <MenuItem value='terminal'>ターミナル画面</MenuItem>
       <MenuItem value='file'>ファイル</MenuItem>
       {(stdout || stderr) && <MenuItem value='/dev/null'>出力を捨てる</MenuItem>}
-      {/* {stdin && prev && <MenuItem value='previous'>前のコマンド</MenuItem>} */}
+      {/* {stdin && prev && <MenuItem value='prev'>前のコマンド</MenuItem>} */}
       {(stdout || stderr) && next && <MenuItem value='next'>次のコマンド</MenuItem>}
     </Select>
   )

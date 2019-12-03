@@ -6,6 +6,10 @@ const defaultCommandData = {
   type: 'Command',
   id: '',
   command: '',
+  existence: {
+    prev: false,
+    next: false
+  },
   pipe: {},
   args: [],
   info: {},
@@ -16,17 +20,20 @@ const CommandRecord = Record(defaultCommandData)
 
 class Command extends CommandRecord {
   constructor(data) {
-    if (Record.isRecord(data)) {
+    if (Command.isCommand(data)) {
       super({
         ...data,
-        pipe: new Pipe(data.pipe)
+        pipe: new Pipe(data.pipe, { prev: data.existence.prev, next: data.existence.next })
       })
       return
     }
     super({
       ...data,
       id: uuidv4(),
-      pipe: new Pipe(data.pipe)
+      pipe: new Pipe(data.pipe, {
+        prev: data.existence && data.existence.prev,
+        next: data.existence && data.existence.next
+      })
     })
   }
 
@@ -35,7 +42,10 @@ class Command extends CommandRecord {
   }
 
   toString() {
-    return `${this.command}`
+    return `${this.command} ${this.pipe.toString({
+      prev: this.existence.prev,
+      next: this.existence.next
+    })}`
   }
 }
 

@@ -9,7 +9,10 @@ class NormalCommand extends Command {
   }
 
   toString() {
-    return `${this.command} ${this.args.join(' ')}`
+    return `${this.command} ${this.pipe.toString({
+      prev: this.existence.prev,
+      next: this.existence.next
+    })}`
   }
 }
 

@@ -9,7 +9,10 @@ class SpecialCommand extends Command {
   }
 
   toString() {
-    return `${this.command} ${this.info}`
+    return `${this.command} ${this.info} ${this.pipe.toString({
+      prev: this.existence.prev,
+      next: this.existence.next
+    })}`
   }
 }
 

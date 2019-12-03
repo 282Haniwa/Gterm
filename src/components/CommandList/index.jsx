@@ -101,6 +101,7 @@ const CommandListComponent = props => {
   const handleChangeRunnableCommand = useCallback(
     index => (event, data) => {
       if (onChange) {
+        dataProp.map(aRunnableUnit => console.log('aRunnableUnit', aRunnableUnit.toString()))
         onChange(event, dataProp.setItem(index, data))
       }
     },

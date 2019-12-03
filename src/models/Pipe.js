@@ -49,26 +49,30 @@ const outputPipeStringMap = {
 }
 
 class Pipe extends PipeRecord {
-  constructor(data) {
-    if (data) {
-      super({
-        ...data,
-        type: 'Pipe',
-        id: uuidv4(),
-        stdin: new PipeData(data.stdin),
-        stdout: new PipeData(data.stdout),
-        stderr: new PipeData(data.stderr)
-      })
+  constructor(data, { prev, next } = { prev: false, next: false }) {
+    if (Pipe.isPipe(data)) {
+      super(data)
     } else {
+      const stdin = prev
+        ? new PipeData({ selected: 'prev' })
+        : new PipeData({ selected: 'terminal' })
+      const stdout = next
+        ? new PipeData({ selected: 'next' })
+        : new PipeData({ selected: 'terminal' })
+      const stderr = new PipeData({ selected: 'terminal' })
       super({
         ...data,
         type: 'Pipe',
         id: uuidv4(),
-        stdin: new PipeData(),
-        stdout: new PipeData(),
-        stderr: new PipeData()
+        stdin: stdin,
+        stdout: stdout,
+        stderr: stderr
       })
     }
+  }
+
+  static isPipe(object) {
+    return object instanceof Pipe
   }
 
   toString({ stdin = false, stdout = false, stderr = false }) {
@@ -77,7 +81,7 @@ class Pipe extends PipeRecord {
     }
 
     let str = ''
-    if (stdin) {
+    if (stdin && inputPipeStringMap[this.stdin.selected]) {
       str = `${inputPipeStringMap[this.stdin.selected](this.stdin)}`
     }
     if (stdout && stderr) {

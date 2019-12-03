@@ -79,9 +79,9 @@ const PipeComponent = props => {
   const [selfInputMode, setSelfInputMode] = useState(false)
   const [selfInputString, setSelfInputString] = useState('')
   const [selectValues, setSelectValues] = useState({
-    stdin: 'terminal',
-    stdout: 'terminal',
-    stderr: 'terminal'
+    stdin: dataProp.stdin.selected,
+    stdout: dataProp.stdout.selected,
+    stderr: dataProp.stderr.selected
   })
   const [fileNames, setFileNames] = useState({
     stdin: '',
@@ -94,6 +94,7 @@ const PipeComponent = props => {
     stderr: false
   })
   const open = Boolean(anchorEl)
+  console.log(dataProp.toJS())
 
   const handleClick = useCallback(event => {
     setAnchorEl(event.currentTarget)
