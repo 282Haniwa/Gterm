@@ -120,16 +120,16 @@ class RunnableUnit extends RunnableUnitRecord {
   }
 
   pushCommand(command) {
-    const lastCommandId = this.commands.last()
+    const lastCommand = this.getCommandById(this.commands.last())
     const listSize = this.commands.size + 1
     return this.merge({
       commandMap: this.commandMap.withMutations(mutator => {
-        mutator.set(
-          lastCommandId,
-          this.commandMap
-            .get(lastCommandId)
-            .updateExistence(commandExistence(listSize - 2, listSize))
-        )
+        if (lastCommand) {
+          mutator.set(
+            lastCommand.id,
+            lastCommand.updateExistence(commandExistence(listSize - 2, listSize))
+          )
+        }
         mutator.set(command.id, command.updateExistence(commandExistence(listSize - 1, listSize)))
       }),
       commands: this.commands.push(command.id)
@@ -137,25 +137,21 @@ class RunnableUnit extends RunnableUnitRecord {
   }
 
   insertCommand(index, command) {
-    const prevCommandId = this.commands.get(index - 1)
-    const nextCommandId = this.commands.get(index)
+    const prevCommand = this.getCommand(index - 1)
+    const nextCommand = this.getCommand(index)
     const listSize = this.commands.size + 1
     return this.merge({
       commandMap: this.commandMap.withMutations(mutator => {
-        if (prevCommandId) {
+        if (prevCommand) {
           mutator.set(
-            prevCommandId,
-            this.commandMap
-              .get(prevCommandId)
-              .updateExistence(commandExistence(index - 1, listSize))
+            prevCommand.index,
+            prevCommand.updateExistence(commandExistence(index - 1, listSize))
           )
         }
-        if (nextCommandId) {
+        if (nextCommand) {
           mutator.set(
-            nextCommandId,
-            this.commandMap
-              .get(nextCommandId)
-              .updateExistence(commandExistence(index + 1, listSize))
+            nextCommand.id,
+            nextCommand.updateExistence(commandExistence(index + 1, listSize))
           )
         }
         mutator.set(command.id, command.updateExistence(commandExistence(index, listSize)))
@@ -169,54 +165,48 @@ class RunnableUnit extends RunnableUnitRecord {
   }
 
   moveCommand(index, to) {
-    const moveData = this.commands.get(index)
-    const prevCommandId = this.commands.get(to - 1)
-    const nextCommandId = this.commands.get(to)
+    const moveData = this.getCommand(index)
+    const prevCommand = this.getCommand(to - 1)
+    const nextCommand = this.getCommand(to)
     const listSize = this.commands.size
     return this.merge({
       commandMap: this.commandMap.withMutations(mutator => {
-        if (prevCommandId) {
+        if (prevCommand) {
           mutator.set(
-            prevCommandId,
-            this.commandMap
-              .get(prevCommandId)
-              .updateExistence(commandExistence(index - 1, listSize))
+            prevCommand.id,
+            prevCommand.updateExistence(commandExistence(index - 1, listSize))
           )
         }
-        if (nextCommandId) {
+        if (nextCommand) {
           mutator.set(
-            nextCommandId,
-            this.commandMap
-              .get(nextCommandId)
-              .updateExistence(commandExistence(index + 1, listSize))
+            nextCommand.id,
+            nextCommand.updateExistence(commandExistence(index + 1, listSize))
           )
         }
         mutator.set(moveData.id, moveData.updateExistence(commandExistence(index, listSize)))
       }),
-      commands: this.commands.remove(index).insert(to, moveData)
+      commands: this.commands.remove(index).insert(to, moveData.id)
     })
   }
 
   removeCommand(index) {
     const command = this.getCommand(index)
-    const prevCommandId = this.commands.get(index - 1)
-    const nextCommandId = this.commands.get(index + 1)
+    const prevCommand = this.getCommand(index - 1)
+    const nextCommand = this.getCommand(index + 1)
     const listSize = this.commands.size - 1
     return this.merge({
       commandMap: this.commandMap.withMutations(mutator => {
         mutator.remove(command.id)
-        if (prevCommandId) {
+        if (prevCommand) {
           mutator.set(
-            prevCommandId,
-            this.commandMap
-              .get(prevCommandId)
-              .updateExistence(commandExistence(index - 1, listSize))
+            prevCommand.id,
+            prevCommand.updateExistence(commandExistence(index - 1, listSize))
           )
         }
-        if (nextCommandId) {
+        if (nextCommand) {
           mutator.set(
-            nextCommandId,
-            this.commandMap.get(nextCommandId).updateExistence(commandExistence(index, listSize))
+            nextCommand.id,
+            nextCommand.updateExistence(commandExistence(index, listSize))
           )
         }
       }),
