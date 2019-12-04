@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { PlayArrow } from '@material-ui/icons'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
 import { RunnableUnit } from 'src/models'
+import useCUI from 'src/hooks/useCUI'
 import Command from '../Command'
 import DroppableZone from '../DroppableZone'
 import Pipe from '../Pipe'
@@ -51,6 +52,7 @@ const RunnableUnitComponent = props => {
   const { data: dataProp, onChange, ...other } = props
   const classes = useStyles()
   const [dragTarget, setDragTarget] = useState(null)
+  const cui = useCUI()
 
   const handleDragStart = useCallback(
     index => event => {
@@ -124,8 +126,9 @@ const RunnableUnitComponent = props => {
   )
 
   const handleClickRunButton = useCallback(() => {
-    console.log(dataProp.toString(), dataProp.toJS())
-  }, [dataProp])
+    // console.log(dataProp.toString())
+    cui.send(dataProp.toString())
+  }, [dataProp, cui])
 
   return (
     <div className={classes.root} {...other}>

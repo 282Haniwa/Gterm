@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { ipcRenderer } from 'electron'
+import { addXterm } from 'src/actions/cui'
 
 const propTypes = {
   id: PropTypes.string.isRequired
@@ -12,6 +14,7 @@ const defaultProps = {}
 
 const CUI = props => {
   const { id, ...other } = props
+  const dispatch = useDispatch()
 
   const initializeTerminal = useCallback(() => {
     const ptyId = 'PTY1'
@@ -29,7 +32,8 @@ const CUI = props => {
       xterm.write(data)
     })
     ipcRenderer.send('OPEN_PTY', ptyId)
-  }, [id])
+    dispatch(addXterm(ptyId, xterm))
+  }, [dispatch, id])
 
   useEffect(() => {
     initializeTerminal()
