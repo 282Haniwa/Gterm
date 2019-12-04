@@ -71,6 +71,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const getSelected = pipeData => {
+  if (pipeData.fileName === '/dev/null') {
+    return '/dev/null'
+  }
+  return pipeData.selected
+}
+
 // TODO: Refactoring
 const PipeComponent = props => {
   const { className, data: dataProp, first, middle, last, onChange, ...other } = props
@@ -79,9 +86,9 @@ const PipeComponent = props => {
   const [selfInputMode, setSelfInputMode] = useState(Boolean(dataProp.other))
   const [selfInputString, setSelfInputString] = useState(dataProp.other)
   const [selectValues, setSelectValues] = useState({
-    stdin: dataProp.stdin.selected,
-    stdout: dataProp.stdout.selected,
-    stderr: dataProp.stderr.selected
+    stdin: getSelected(dataProp.stdin),
+    stdout: getSelected(dataProp.stdout),
+    stderr: getSelected(dataProp.stderr)
   })
   const [fileNames, setFileNames] = useState({
     stdin: dataProp.stdin.fileName,
@@ -183,9 +190,9 @@ const PipeComponent = props => {
       setSelfInputMode(Boolean(dataProp.other))
       setSelfInputString(dataProp.other)
       setSelectValues({
-        stdin: dataProp.stdin.selected,
-        stdout: dataProp.stdout.selected,
-        stderr: dataProp.stderr.selected
+        stdin: getSelected(dataProp.stdin),
+        stdout: getSelected(dataProp.stdout),
+        stderr: getSelected(dataProp.stderr)
       })
       setFileNames({
         stdin: dataProp.stdin.fileName,
