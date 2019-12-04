@@ -20,12 +20,7 @@ const useStyles = makeStyles(
       borderBottom: `1px solid ${theme.palette.divider}`,
       boxSizing: 'border-box'
     },
-    wrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexGrow: 0
-    },
-    commandWrapper: {
+    flexRow: {
       display: 'flex',
       flexDirection: 'row',
       flexGrow: 0
@@ -56,10 +51,6 @@ const RunnableUnitComponent = props => {
   const { data: dataProp, onChange, ...other } = props
   const classes = useStyles()
   const [dragTarget, setDragTarget] = useState(null)
-
-  // const handleChange = useCallback(event => {
-  //   setData(data)
-  // }, [])
 
   const handleDragStart = useCallback(
     index => event => {
@@ -143,18 +134,14 @@ const RunnableUnitComponent = props => {
           <PlayArrow />
         </IconButton>
       </DroppableZone>
-      <div className={classes.wrapper}>
+      <div className={classes.flexRow}>
         {dataProp.commands.map((commandId, index) => {
           const aCommand = dataProp.commandMap.get(commandId)
           const isFirst = index === 0
           const isLast = index === dataProp.commands.size - 1
           return (
-            <>
-              <DroppableZone
-                className={classes.commandWrapper}
-                key={commandId}
-                onBlockDrop={handleDropOnCommand(index)}
-              >
+            <div className={classes.flexRow} key={commandId}>
+              <DroppableZone className={classes.flexRow} onBlockDrop={handleDropOnCommand(index)}>
                 {isFirst && <Pipe first data={aCommand.pipe} onChange={handleChangePipe(index)} />}
                 <Command
                   editable
@@ -164,8 +151,7 @@ const RunnableUnitComponent = props => {
                 />
               </DroppableZone>
               <DroppableZone
-                className={classes.commandWrapper}
-                key={`${commandId}-pipe`}
+                className={classes.flexRow}
                 onBlockDrop={handleDropOnCommand(index + 1)}
               >
                 <Pipe
@@ -175,7 +161,7 @@ const RunnableUnitComponent = props => {
                   onChange={handleChangePipe(index)}
                 />
               </DroppableZone>
-            </>
+            </div>
           )
         })}
       </div>
