@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const getSelected = pipeData => {
-  if (pipeData.fileName === '/dev/null') {
+  if (pipeData.selected === 'file' && pipeData.fileName === '/dev/null') {
     return '/dev/null'
   }
   return pipeData.selected

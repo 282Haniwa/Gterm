@@ -23,6 +23,7 @@ const redirectSymbol = data => (data.appending ? '>>' : '>')
  * outputPipeStringMap[stdoutSelected][stderrSelected]
  * いくつか理想的な使い方でないものがある
  * 特に、次のコマンドに渡すものがないパターンはパイプでつなぐべきではない
+ * 現状、次のコマンドにデータを渡さないものは使われないようにしているので正しく動作するか確認していない
  */
 const outputPipeStringMap = {
   next: {
