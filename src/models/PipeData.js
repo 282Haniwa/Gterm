@@ -5,7 +5,7 @@ const defaultPipeDataUnitData = {
   type: 'PipeData',
   id: '',
   selected: 'terminal',
-  filename: '',
+  fileName: '',
   appending: false,
   string: ''
 }
@@ -29,7 +29,7 @@ class PipeData extends PipeDataRecord {
   setFile(fileName, appending = false) {
     return this.merge({
       selected: 'file',
-      filename: fileName,
+      fileName: fileName,
       appending: appending
     })
   }

@@ -136,7 +136,26 @@ const PipeComponent = props => {
 
   const handleChangeSelect = useCallback(
     target => event => {
-      setSelectValues({ ...selectValues, [target]: event.target.value })
+      if (target === 'stdout' && event.target.value !== 'next') {
+        setSelectValues({
+          ...selectValues,
+          stderr: 'next',
+          [target]: event.target.value
+        })
+        return
+      }
+      if (target === 'stderr' && event.target.value !== 'next') {
+        setSelectValues({
+          ...selectValues,
+          stdout: 'next',
+          [target]: event.target.value
+        })
+        return
+      }
+      setSelectValues({
+        ...selectValues,
+        [target]: event.target.value
+      })
     },
     [selectValues]
   )

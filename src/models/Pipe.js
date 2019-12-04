@@ -28,7 +28,7 @@ const outputPipeStringMap = {
   next: {
     next: () => '&|',
     terminal: () => '|',
-    file: (stdout, stderr) => `2${redirectSymbol(stderr)} ${stderr.toString()} |`
+    file: (stdout, stderr) => `2${redirectSymbol(stderr)} ${stderr.fileName} |`
   },
   terminal: {
     // あまりよくはない(stdoutをターミナルに出して、stderrを使うuse caseはまずないはず)
@@ -36,15 +36,16 @@ const outputPipeStringMap = {
     // 最後のコマンドの時のみ
     terminal: () => '',
     // あまりよくはない(stdoutをターミナルに出して、stderrを使うuse caseはまずないはず)
-    file: stdout => `1>&2 2${redirectSymbol(stdout)} ${stdout.toString()} |`
+    file: stdout => `1>&2 2${redirectSymbol(stdout)} ${stdout.fileName} |`
   },
   file: {
-    next: stdout => `2>&1 ${redirectSymbol(stdout)} ${stdout.toString()} |`,
+    next: stdout => `2>&1 ${redirectSymbol(stdout)} ${stdout.fileName} |`,
     // 最後のコマンドの時のみ
-    terminal: stdout => `${redirectSymbol(stdout)} ${stdout.toString()}`,
+    terminal: stdout => `${redirectSymbol(stdout)} ${stdout.fileName}`,
     // 最後のコマンドの時のみ
     // eslint-disable-next-line prettier/prettier
-    file: (stdout, stderr) => `${redirectSymbol(stdout)} ${stdout.toString()} 2${redirectSymbol(stderr)} ${stderr.toString()}`
+    file: (stdout, stderr) =>
+      `${redirectSymbol(stdout)} ${stdout.fileName} 2${redirectSymbol(stderr)} ${stderr.fileName}`
   }
 }
 
