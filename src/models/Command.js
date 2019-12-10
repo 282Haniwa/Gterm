@@ -1,4 +1,4 @@
-import { Record } from 'immutable'
+import { Record, List } from 'immutable'
 import uuidv4 from 'uuid/v4'
 import Pipe from './Pipe'
 
@@ -23,7 +23,8 @@ class Command extends CommandRecord {
     if (Command.isCommand(data)) {
       super(
         data.merge({
-          pipe: new Pipe(data.pipe, { prev: data.existence.prev, next: data.existence.next })
+          pipe: new Pipe(data.pipe, { prev: data.existence.prev, next: data.existence.next }),
+          args: List(data.args)
         })
       )
       return
@@ -34,7 +35,8 @@ class Command extends CommandRecord {
       pipe: new Pipe(data.pipe, {
         prev: data.existence && data.existence.prev,
         next: data.existence && data.existence.next
-      })
+      }),
+      args: List(data.args)
     })
   }
 
@@ -50,6 +52,29 @@ class Command extends CommandRecord {
       },
       pipe: this.pipe.resetSelected({ prev: prev, next: next })
     })
+  }
+
+  addArg(arg = '') {
+    if (this.args.last() === '') {
+      return this
+    }
+    return this.set('args', this.args.push(arg))
+  }
+
+  setArg(index, arg) {
+    return this.set('args', this.args.set(index, arg)).clearEmptyArg(true)
+  }
+
+  clearEmptyArg(leaveLast = false) {
+    return this.set(
+      'args',
+      this.args.filter((arg, index) => {
+        if (leaveLast && index === this.args.size - 1) {
+          return true
+        }
+        return arg !== ''
+      })
+    )
   }
 
   toString() {

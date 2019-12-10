@@ -117,6 +117,15 @@ const RunnableUnitComponent = props => {
     [dataProp, dragTarget, onChange]
   )
 
+  const handleChangeCommand = useCallback(
+    (event, data) => {
+      if (onChange) {
+        onChange(event, dataProp.updateCommand(data))
+      }
+    },
+    [dataProp, onChange]
+  )
+
   const handleChangePipe = useCallback(
     index => (event, value) => {
       const aCommand = dataProp.getCommand(index).set('pipe', value)
@@ -149,6 +158,7 @@ const RunnableUnitComponent = props => {
                 <Command
                   editable
                   data={aCommand}
+                  onChange={handleChangeCommand}
                   onDragEnd={handleDragEnd(index)}
                   onDragStart={handleDragStart(index)}
                 />

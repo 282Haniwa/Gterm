@@ -52,6 +52,9 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'monaco, courier-new, courier, monospace',
     fontSize: '1em',
     backgroundColor: 'white'
+  },
+  addArgButton: {
+    color: 'white'
   }
 }))
 
@@ -62,7 +65,8 @@ const propTypes = {
     PropTypes.instanceOf(SpecialCommand),
     PropTypes.object
   ]),
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
@@ -71,9 +75,9 @@ const defaultProps = {
 }
 
 const Command = forwardRef((props, ref) => {
-  const { className, data, editable, ...other } = props
+  const { className, data: dataProp, editable, onChange, ...other } = props
   const classes = useStyles()
-  const [args, setArgs] = useState(data.args || [])
+  const [args, setArgs] = useState(dataProp.args || [])
   const [inputValue, setInputValue] = useState({})
 
   const calcStringWidth = useCallback(text => {
@@ -86,51 +90,50 @@ const Command = forwardRef((props, ref) => {
   }, [])
 
   const handleArgChange = useCallback(
-    target => event => {
+    index => event => {
       event.target.style.width = calcStringWidth(event.target.value)
-      setInputValue({ target: target, value: event.target.value })
+      if (index === args.size - 1) {
+        setArgs(args.push(''))
+      }
+      setInputValue({ target: index, value: event.target.value })
     },
-    [calcStringWidth]
+    [args, calcStringWidth]
   )
 
   const handleFocusArg = useCallback(
-    target => event => {
-      setInputValue({ target: target, value: event.target.value })
+    index => event => {
+      setInputValue({ target: index, value: event.target.value })
     },
     []
   )
 
   const handleBlurArg = useCallback(
-    target => event => {
+    index => event => {
       event.target.style.width = calcStringWidth(event.target.value)
-      setArgs(
-        args.map((arg, index) => {
-          if (index === target) {
-            return inputValue.value
-          }
-          return arg
-        })
-      )
+      if (onChange) {
+        onChange(event, dataProp.setArg(index, inputValue.value))
+      }
     },
-    [calcStringWidth, args, inputValue.value]
+    [calcStringWidth, onChange, dataProp, inputValue.value]
   )
 
   useEffect(() => {
-    if (editable && data.args) {
-      setArgs(data.args)
+    if (editable && dataProp) {
+      setArgs(dataProp.addArg().args)
     }
-  }, [data.args, editable])
+  }, [dataProp, editable])
 
   return (
     <div className={clsx(classes.root, className)} ref={ref} {...other}>
-      <div className={classes.command}>{data.command}</div>
+      <div className={classes.command}>{dataProp.command}</div>
       <div className={classes.args}>
         {editable &&
           args.map((arg, index) => (
             <input
               className={classes.arg}
               defaultValue={arg}
-              key={`${data.command}-${arg}`}
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${dataProp.command}-${arg}-${index}`}
               onBlur={handleBlurArg(index)}
               onFocus={handleFocusArg(index)}
               onInput={handleArgChange(index)}
@@ -141,10 +144,11 @@ const Command = forwardRef((props, ref) => {
             />
           ))}
         {!editable &&
-          data.args.map(arg => (
+          dataProp.args.map((arg, index) => (
             <div
               className={classes.arg}
-              key={`${data.command}-${arg}`}
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${dataProp.command}-${arg}-${index}`}
               style={{
                 width: calcStringWidth(arg)
               }}
