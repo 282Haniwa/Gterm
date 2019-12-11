@@ -90,7 +90,7 @@ class Pipe extends PipeRecord {
     })
   }
 
-  toString({ stdin = false, stdout = false, stderr = false }) {
+  toString({ stdin = true, stdout = true, stderr = true } = {}) {
     if (this.other) {
       return this.other
     }
@@ -104,7 +104,7 @@ class Pipe extends PipeRecord {
         this.stdout,
         this.stderr
       )
-      return `${str}${pipeString}`
+      str = `${str}${pipeString}`
     }
     return str
   }
