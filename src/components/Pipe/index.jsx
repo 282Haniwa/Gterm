@@ -2,12 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
-import Button from '@material-ui/core/Button'
 import Switch from '@material-ui/core/Switch'
 import Input from '@material-ui/core/Input'
 import Paper from '@material-ui/core/Paper'
 import Popover from '@material-ui/core/Popover'
 import { Pipe } from 'src/models'
+import PipeSurface from './PipeSurface'
 import PipeSelect from './PipeSelect'
 
 const propTypes = {
@@ -27,12 +27,7 @@ const defaultProps = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100%',
-    width: '64px'
-  },
-  button: {
-    height: '100%',
-    width: '64px'
+    height: '100%'
   },
   popoverContent: {
     display: 'flex',
@@ -211,9 +206,15 @@ const PipeComponent = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...other}>
-      <Button className={classes.button} onClick={handleClick}>
-        {'pipe'}
-      </Button>
+      <PipeSurface
+        first={first}
+        last={last}
+        middle={middle}
+        onClick={handleClick}
+        stderr={dataProp.stderr}
+        stdin={dataProp.stdin}
+        stdout={dataProp.stdout}
+      />
       <Popover
         anchorEl={anchorEl}
         anchorOrigin={{

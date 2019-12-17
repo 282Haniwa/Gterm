@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="48" viewBox="0 0 64 48">
+  <defs>
+    <clipPath id="clip-err_next_out_file_pipe">
+      <rect width="64" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="err_next_out_file_pipe" clip-path="url(#clip-err_next_out_file_pipe)">
+    <g id="err_next_out_file_pipe-2" data-name="err_next_out_file_pipe">
+      <path id="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="red"/>
+      <path id="stderr" d="M195.749,293.719v18h-8v-10h-28v-8Z" transform="translate(-159.749 -263.719)" fill="lime"/>
+    </g>
+  </g>
+</svg>

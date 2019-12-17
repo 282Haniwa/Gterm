@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="48" viewBox="0 0 38 48">
+  <defs>
+    <clipPath id="clip-file">
+      <rect width="38" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="file" clip-path="url(#clip-file)">
+    <g id="パス_4" data-name="パス 4" transform="translate(0 -88.018)" fill="#ffecb3">
+      <path d="M 37.5 135.5179595947266 L 0.5 135.5179595947266 L 0.5 88.51795959472656 L 29.88409233093262 88.51795959472656 L 37.5 95.73302459716797 L 37.5 135.5179595947266 Z" stroke="none"/>
+      <path d="M 1 89.01795959472656 L 1 135.0179595947266 L 37 135.0179595947266 L 37 95.94808959960938 L 29.68486404418945 89.01795959472656 L 1 89.01795959472656 M 0 88.01795959472656 L 30.08333015441895 88.01795959472656 L 38 95.51795959472656 L 38 136.0179595947266 L 0 136.0179595947266 L 0 88.01795959472656 Z" stroke="none" fill="#707070"/>
+    </g>
+    <g id="パス_5" data-name="パス 5" transform="translate(-9.5 -89.5)" fill="#fff">
+      <path d="M 47.79290771484375 98.5 L 38.50000762939453 98.5 L 38.50000762939453 89.20709991455078 L 47.79290771484375 98.5 Z" stroke="none"/>
+      <path d="M 39.00000762939453 90.41422271728516 L 39.00000762939453 98 L 46.58578872680664 98 L 39.00000762939453 90.41422271728516 M 38.00000762939453 88 L 49.00000762939453 99 L 38.00000762939453 99 L 38.00000762939453 88 Z" stroke="none" fill="#707070"/>
+    </g>
+    <text id="FILE-2" data-name="FILE" transform="translate(7 31)" fill="#707070" font-size="12" font-family="HiraKakuProN-W3, Hiragino Kaku Gothic ProN"><tspan x="0" y="0">FILE</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-input_pipe">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="input_pipe" clip-path="url(#clip-input_pipe)">
+    <g id="input_pipe-2" data-name="input_pipe">
+      <path id="stdin" d="M159.749,273.719h48v8h-48Z" transform="translate(-159.749 -253.719)" fill="lime"/>
+    </g>
+  </g>
+</svg>

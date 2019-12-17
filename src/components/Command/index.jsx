@@ -22,8 +22,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
+    height: '48px',
     width: 'max-content',
     padding: theme.spacing(1),
+    boxSizing: 'border-box',
     borderRadius: '5px',
     border: `solid 1px ${theme.palette.divider}`,
     backgroundColor: blue[400],
