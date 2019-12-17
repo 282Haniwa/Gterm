@@ -27,7 +27,7 @@ const redirectSymbol = data => (data.appending ? '>>' : '>')
  */
 const outputPipeStringMap = {
   next: {
-    next: () => '&|',
+    next: () => '2>&1 |',
     terminal: () => '|',
     file: (stdout, stderr) => `2${redirectSymbol(stderr)} ${stderr.fileName} |`
   },
