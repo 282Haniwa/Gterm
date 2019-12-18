@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import makeStyles from '@material-ui/styles/makeStyles'
-import { green } from '@material-ui/core/colors'
 import IconButton from '@material-ui/core/IconButton'
 import { PlayArrow } from '@material-ui/icons'
 import makeBlockDroppable from 'src/helper/makeBlockDroppable'
@@ -35,7 +34,7 @@ const useStyles = makeStyles(
       minWidth: theme.spacing(8)
     },
     runButton: {
-      color: green[400]
+      color: theme.palette.jis.green
     }
   }),
   { name: 'RunnableUnit' }

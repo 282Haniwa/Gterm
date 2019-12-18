@@ -61,6 +61,12 @@ const useStyles = makeStyles(theme => ({
   input: {
     flexGrow: 0
   },
+  stdout: {
+    color: theme.palette.jis.green
+  },
+  stderr: {
+    color: theme.palette.jis.red
+  },
   marginLeft: {
     marginLeft: theme.spacing(1)
   }
@@ -281,7 +287,7 @@ const PipeComponent = props => {
               )}
               {(middle || last) && (
                 <div className={classes.wrapper}>
-                  <div className={classes.label}>stdout</div>
+                  <div className={clsx(classes.label, classes.stdout)}>stdout</div>
                   <PipeSelect
                     stdout
                     className={clsx(classes.marginLeft, classes.select)}
@@ -312,7 +318,7 @@ const PipeComponent = props => {
               )}
               {(middle || last) && (
                 <div className={classes.wrapper}>
-                  <div className={classes.label}>stderr</div>
+                  <div className={clsx(classes.label, classes.stderr)}>stderr</div>
                   <PipeSelect
                     stderr
                     className={clsx(classes.marginLeft, classes.select)}

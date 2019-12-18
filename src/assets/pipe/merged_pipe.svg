@@ -6,8 +6,8 @@
   </defs>
   <g id="merged_pipe" clip-path="url(#clip-merged_pipe)">
     <g id="merged_pipe-2" data-name="merged_pipe">
-      <path id="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="lime"/>
-      <path id="stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="red"/>
+      <path id="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="#00b06b"/>
+      <path id="stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="#ff4b00"/>
     </g>
   </g>
 </svg>

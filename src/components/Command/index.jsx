@@ -2,7 +2,6 @@ import React, { forwardRef, useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import makeStyles from '@material-ui/styles/makeStyles'
-import { blue } from '@material-ui/core/colors'
 import makeBlockDraggable from 'src/helper/makeBlockDraggable'
 import { NormalCommand, SpecialCommand } from 'src/models'
 
@@ -28,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     boxSizing: 'border-box',
     borderRadius: '5px',
     border: `solid 1px ${theme.palette.divider}`,
-    backgroundColor: blue[400],
+    backgroundColor: theme.palette.jis.blue,
     cursor: 'grab',
     '&:active': {
       cursor: 'grabbing'
