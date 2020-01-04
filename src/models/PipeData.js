@@ -22,6 +22,10 @@ class PipeData extends PipeDataRecord {
     })
   }
 
+  static isPipeData(object) {
+    return object instanceof PipeData
+  }
+
   setSelected(value) {
     return this.set('selected', value)
   }

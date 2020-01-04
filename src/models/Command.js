@@ -10,8 +10,8 @@ const defaultCommandData = {
     prev: false,
     next: false
   },
-  pipe: {},
-  args: [],
+  pipe: new Pipe(),
+  args: List(),
   info: {},
   content: []
 }

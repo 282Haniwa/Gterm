@@ -14,6 +14,10 @@ class CommandList extends CommandListRecord {
     })
   }
 
+  static isCommandList(object) {
+    return object instanceof CommandList
+  }
+
   getItem(index) {
     return this.commandList.get(index)
   }

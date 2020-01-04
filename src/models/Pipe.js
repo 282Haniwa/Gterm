@@ -5,9 +5,9 @@ import PipeData from './PipeData'
 const defaultPipeUnitData = {
   type: 'Pipe',
   id: '',
-  stdin: null,
-  stdout: null,
-  stderr: null,
+  stdin: new PipeData(),
+  stdout: new PipeData(),
+  stderr: new PipeData(),
   other: ''
 }
 

@@ -14,11 +14,7 @@ class SpecialCommand extends Command {
   }
 
   toString() {
-    return `${this.command} ${this.info} ${this.pipe.toString({
-      stdin: this.existence.prev,
-      stdout: this.existence.next,
-      stderr: this.existence.next
-    })}`
+    return `${this.command} ${this.info} ${this.pipe.toString()}`
   }
 }
 
