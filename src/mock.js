@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4'
 
-const commandIDArray = Array.from(new Array(5), () => uuidv4())
+const commandIDArray = Array.from(new Array(6), () => uuidv4())
 // eslint-disable-next-line import/prefer-default-export
 export const commandList = [
   {
@@ -10,27 +10,34 @@ export const commandList = [
       [commandIDArray[0]]: {
         id: commandIDArray[0],
         type: 'NormalCommand',
-        command: 'ls',
-        args: ['-1'],
+        command: 'pwd',
+        args: [],
         pipe: {
           stdin: null,
-          stdout: commandIDArray[1],
-          stderr: null
-        }
-      },
-      [commandIDArray[1]]: {
-        id: commandIDArray[1],
-        type: 'NormalCommand',
-        command: 'wc',
-        args: ['-l'],
-        pipe: {
-          stdin: commandIDArray[0],
           stdout: null,
           stderr: null
         }
       }
     },
-    commands: [commandIDArray[0], commandIDArray[1]]
+    commands: [commandIDArray[0]]
+  },
+  {
+    type: 'RunnableUnit',
+    id: uuidv4(),
+    commandMap: {
+      [commandIDArray[1]]: {
+        id: commandIDArray[1],
+        type: 'NormalCommand',
+        command: 'ls',
+        args: ['-1'],
+        pipe: {
+          stdin: null,
+          stdout: null,
+          stderr: null
+        }
+      }
+    },
+    commands: [commandIDArray[1]]
   },
   {
     type: 'RunnableUnit',
@@ -40,7 +47,7 @@ export const commandList = [
         id: commandIDArray[2],
         type: 'NormalCommand',
         command: 'ls',
-        args: ['-1', '-a'],
+        args: ['-1'],
         pipe: {
           stdin: null,
           stdout: commandIDArray[3],
@@ -68,15 +75,26 @@ export const commandList = [
       [commandIDArray[4]]: {
         id: commandIDArray[4],
         type: 'NormalCommand',
-        command: 'pwd',
-        args: [],
+        command: 'ls',
+        args: ['-1', '-a'],
         pipe: {
           stdin: null,
+          stdout: commandIDArray[5],
+          stderr: null
+        }
+      },
+      [commandIDArray[5]]: {
+        id: commandIDArray[5],
+        type: 'NormalCommand',
+        command: 'wc',
+        args: ['-l'],
+        pipe: {
+          stdin: commandIDArray[4],
           stdout: null,
           stderr: null
         }
       }
     },
-    commands: [commandIDArray[4]]
+    commands: [commandIDArray[4], commandIDArray[5]]
   }
 ]

@@ -14,7 +14,7 @@ const defaultPipeUnitData = {
 const PipeRecord = Record(defaultPipeUnitData)
 
 const inputPipeStringMap = {
-  file: data => ` < ${data.toString()}`
+  file: data => `< ${data.toString()}`
 }
 
 const redirectSymbol = data => (data.appending ? '>>' : '>')
@@ -36,8 +36,8 @@ const outputPipeStringMap = {
     next: () => '3>&1 1>&2 2>&3 |',
     // 最後のコマンドの時のみ
     terminal: () => '',
-    // あまりよくはない(stdoutをターミナルに出して、stderrを使うuse caseはまずないはず)
-    file: stdout => `1>&2 2${redirectSymbol(stdout)} ${stdout.fileName} |`
+    // 最後のコマンドの時のみ
+    file: (stdout, stderr) => `1>&2 2${redirectSymbol(stderr)} ${stderr.fileName}`
   },
   file: {
     next: stdout => `2>&1 ${redirectSymbol(stdout)} ${stdout.fileName} |`,

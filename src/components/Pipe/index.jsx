@@ -272,15 +272,6 @@ const PipeComponent = props => {
                         placeholder='ファイルパス'
                         value={fileNames.stdin}
                       />
-                      <div className={clsx(classes.marginLeft, classes.switchWrapper)}>
-                        <div className={classes.switchLabel}>追記</div>
-                        <Switch
-                          checked={appendingSwitchValues.stdin}
-                          color='primary'
-                          onChange={handleChangeAppendingValues('stdin')}
-                          value='appending-stdin'
-                        />
-                      </div>
                     </>
                   )}
                 </div>

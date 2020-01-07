@@ -14,7 +14,10 @@ class NormalCommand extends Command {
   }
 
   toString() {
-    return `${this.command} ${this.args.join(' ')} ${this.pipe.toString()}`
+    const aCommand = this.clearEmptyArg()
+    const pipeString = aCommand.pipe.toString()
+    const argsString = aCommand.args.join(' ')
+    return `${aCommand.command}${argsString && ` ${argsString}`}${pipeString && ` ${pipeString}`}`
   }
 }
 

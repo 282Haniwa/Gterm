@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="48" viewBox="0 0 64 48">
   <defs>
-    <clipPath id="clip-path">
-      <path id="stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="#fff"/>
+    <clipPath id="clip-path-3">
+      <path id="merged_pipe_stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="#fff"/>
     </clipPath>
-    <clipPath id="clip-path-2">
+    <clipPath id="clip-path-4">
       <rect width="117" height="45.962" fill="none"/>
     </clipPath>
     <clipPath id="clip-merged_pipe">
@@ -12,69 +12,71 @@
   </defs>
   <g id="merged_pipe" clip-path="url(#clip-merged_pipe)">
     <g id="merged_pipe-2" data-name="merged_pipe">
-      <path id="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="#00b06b"/>
-      <path id="stderr-2" data-name="stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="#ff4b00"/>
-      <g id="pattern" clip-path="url(#clip-path)">
-        <g id="リピートグリッド_2" data-name="リピートグリッド 2" transform="translate(-39.77 6.808)" clip-path="url(#clip-path-2)">
-          <g transform="translate(30.77 9.192)">
-            <rect id="長方形_3" data-name="長方形 3" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(36.77 9.192)">
-            <rect id="長方形_4" data-name="長方形 4" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(42.77 9.192)">
-            <rect id="長方形_5" data-name="長方形 5" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(48.77 9.192)">
-            <rect id="長方形_6" data-name="長方形 6" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(54.77 9.192)">
-            <rect id="長方形_7" data-name="長方形 7" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(60.77 9.192)">
-            <rect id="長方形_8" data-name="長方形 8" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(66.77 9.192)">
-            <rect id="長方形_9" data-name="長方形 9" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(72.77 9.192)">
-            <rect id="長方形_10" data-name="長方形 10" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(78.77 9.192)">
-            <rect id="長方形_11" data-name="長方形 11" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(84.77 9.192)">
-            <rect id="長方形_12" data-name="長方形 12" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(90.77 9.192)">
-            <rect id="長方形_13" data-name="長方形 13" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(96.77 9.192)">
-            <rect id="長方形_14" data-name="長方形 14" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(102.77 9.192)">
-            <rect id="長方形_15" data-name="長方形 15" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(108.77 9.192)">
-            <rect id="長方形_16" data-name="長方形 16" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(114.77 9.192)">
-            <rect id="長方形_17" data-name="長方形 17" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(120.77 9.192)">
-            <rect id="長方形_18" data-name="長方形 18" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(126.77 9.192)">
-            <rect id="長方形_19" data-name="長方形 19" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(132.77 9.192)">
-            <rect id="長方形_20" data-name="長方形 20" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(138.77 9.192)">
-            <rect id="長方形_21" data-name="長方形 21" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(144.77 9.192)">
-            <rect id="長方形_22" data-name="長方形 22" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+      <path id="merged_pipe_stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="#00b06b"/>
+      <g id="merged_pipe_stderr-2" data-name="merged_pipe_stderr">
+        <path id="merged_pipe_stderr-3" data-name="merged_pipe_stderr" d="M195.749,281.719v20h-36v-8h28v-12Z" transform="translate(-159.749 -263.719)" fill="#ff4b00"/>
+        <g id="merged_pipe_pattern" clip-path="url(#clip-path-3)">
+          <g id="merged_pipe_repeat_grid" transform="translate(-39.77 6.808)" clip-path="url(#clip-path-4)">
+            <g transform="translate(30.77 9.192)">
+              <rect id="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(36.77 9.192)">
+              <rect id="merged_pipe_square-2" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(42.77 9.192)">
+              <rect id="merged_pipe_square-3" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(48.77 9.192)">
+              <rect id="merged_pipe_square-4" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(54.77 9.192)">
+              <rect id="merged_pipe_square-5" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(60.77 9.192)">
+              <rect id="merged_pipe_square-6" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(66.77 9.192)">
+              <rect id="merged_pipe_square-7" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(72.77 9.192)">
+              <rect id="merged_pipe_square-8" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(78.77 9.192)">
+              <rect id="merged_pipe_square-9" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(84.77 9.192)">
+              <rect id="merged_pipe_square-10" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(90.77 9.192)">
+              <rect id="merged_pipe_square-11" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(96.77 9.192)">
+              <rect id="merged_pipe_square-12" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(102.77 9.192)">
+              <rect id="merged_pipe_square-13" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(108.77 9.192)">
+              <rect id="merged_pipe_square-14" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(114.77 9.192)">
+              <rect id="merged_pipe_square-15" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(120.77 9.192)">
+              <rect id="merged_pipe_square-16" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(126.77 9.192)">
+              <rect id="merged_pipe_square-17" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(132.77 9.192)">
+              <rect id="merged_pipe_square-18" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(138.77 9.192)">
+              <rect id="merged_pipe_square-19" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(144.77 9.192)">
+              <rect id="merged_pipe_square-20" data-name="merged_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
           </g>
         </g>
       </g>

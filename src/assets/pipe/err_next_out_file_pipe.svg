@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="48" viewBox="0 0 64 48">
   <defs>
     <clipPath id="clip-path">
-      <path id="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="#ff4b00"/>
+      <path id="out_next_err_file_pipe_stderr" d="M223.749,293.719v8h-64v-8Z" transform="translate(-159.749 -283.719)" fill="#ff4b00"/>
     </clipPath>
     <clipPath id="clip-path-2">
       <rect width="117" height="45.962" fill="none"/>
@@ -11,70 +11,72 @@
     </clipPath>
   </defs>
   <g id="err_next_out_file_pipe" clip-path="url(#clip-err_next_out_file_pipe)">
-    <g id="err_next_out_file_pipe-2" data-name="err_next_out_file_pipe">
-      <path id="stdout-2" data-name="stdout" d="M159.749,273.719h64v8h-64Z" transform="translate(-159.749 -263.719)" fill="#ff4b00"/>
-      <path id="stderr" d="M195.749,293.719v18h-8v-10h-28v-8Z" transform="translate(-159.749 -263.719)" fill="#00b06b"/>
-      <g id="pattern" clip-path="url(#clip-path)">
-        <g id="リピートグリッド_4" data-name="リピートグリッド 4" transform="translate(-48.77 -8.192)" clip-path="url(#clip-path-2)">
-          <g transform="translate(30.77 9.192)">
-            <rect id="長方形_43" data-name="長方形 43" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(36.77 9.192)">
-            <rect id="長方形_44" data-name="長方形 44" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(42.77 9.192)">
-            <rect id="長方形_45" data-name="長方形 45" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(48.77 9.192)">
-            <rect id="長方形_46" data-name="長方形 46" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(54.77 9.192)">
-            <rect id="長方形_47" data-name="長方形 47" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(60.77 9.192)">
-            <rect id="長方形_48" data-name="長方形 48" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(66.77 9.192)">
-            <rect id="長方形_49" data-name="長方形 49" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(72.77 9.192)">
-            <rect id="長方形_50" data-name="長方形 50" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(78.77 9.192)">
-            <rect id="長方形_51" data-name="長方形 51" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(84.77 9.192)">
-            <rect id="長方形_52" data-name="長方形 52" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(90.77 9.192)">
-            <rect id="長方形_53" data-name="長方形 53" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(96.77 9.192)">
-            <rect id="長方形_54" data-name="長方形 54" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(102.77 9.192)">
-            <rect id="長方形_55" data-name="長方形 55" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(108.77 9.192)">
-            <rect id="長方形_56" data-name="長方形 56" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(114.77 9.192)">
-            <rect id="長方形_57" data-name="長方形 57" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(120.77 9.192)">
-            <rect id="長方形_58" data-name="長方形 58" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(126.77 9.192)">
-            <rect id="長方形_59" data-name="長方形 59" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(132.77 9.192)">
-            <rect id="長方形_60" data-name="長方形 60" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(138.77 9.192)">
-            <rect id="長方形_61" data-name="長方形 61" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
-          </g>
-          <g transform="translate(144.77 9.192)">
-            <rect id="長方形_62" data-name="長方形 62" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+    <g id="out_next_err_file_pipe">
+      <path id="out_next_err_file_pipe_stdout" d="M159.749,273.719h36v18h-8v-10h-28Z" transform="translate(-159.749 -243.719)" fill="#00b06b"/>
+      <g id="out_next_err_file_pipe_stderr-2" data-name="out_next_err_file_pipe_stderr">
+        <path id="out_next_err_file_pipe_stderr-3" data-name="out_next_err_file_pipe_stderr" d="M223.749,293.719v8h-64v-8Z" transform="translate(-159.749 -283.719)" fill="#ff4b00"/>
+        <g id="out_next_err_file_pipe_pattern" clip-path="url(#clip-path)">
+          <g id="out_next_err_file_pipe_repeat_grid" transform="translate(-36.77 -8.192)" clip-path="url(#clip-path-2)">
+            <g transform="translate(30.77 9.192)">
+              <rect id="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(36.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-2" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(42.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-3" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(48.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-4" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(54.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-5" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(60.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-6" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(66.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-7" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(72.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-8" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(78.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-9" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(84.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-10" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(90.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-11" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(96.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-12" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(102.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-13" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(108.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-14" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(114.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-15" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(120.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-16" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(126.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-17" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(132.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-18" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(138.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-19" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
+            <g transform="translate(144.77 9.192)">
+              <rect id="out_next_err_file_pipe_square-20" data-name="out_next_err_file_pipe_square" width="63" height="2" transform="translate(-30.77 35.355) rotate(-45)" fill="#fff"/>
+            </g>
           </g>
         </g>
       </g>

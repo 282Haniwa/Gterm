@@ -78,12 +78,5 @@
             "sleep",
             "crontab"
         ]
-    },
-    {
-        "group": {
-            "key": "builtin",
-            "name": "組み込み"
-        },
-        "commands": []
     }
 ]
