@@ -91,7 +91,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/rollup.config.js', './eslint/tests/*']
+        devDependencies: true
       }
     ],
     'react/forbid-prop-types': 'off',

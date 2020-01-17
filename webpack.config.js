@@ -3,15 +3,15 @@ const path = require('path')
 module.exports = {
   mode: 'development',
   target: 'electron-renderer',
-  entry: './src/index.jsx',
+  entry: path.resolve(__dirname, './src/renderer/index.jsx'),
   output: {
-    path: `${__dirname}/dist`,
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, './build'),
+    filename: 'app.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src')
+      src: path.resolve(__dirname, './src/renderer')
     },
     extensions: ['.js', '.jsx', '.json']
   },
