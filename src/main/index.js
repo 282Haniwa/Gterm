@@ -1,12 +1,32 @@
 const electron = require('electron')
+const path = require('path')
 const os = require('os')
 const pty = require('node-pty')
 
-const { app, ipcMain, BrowserWindow } = electron
+const isDevelopment = process.env.NODE_ENV === 'development'
+
+const { app, ipcMain, BrowserWindow, Menu } = electron
 const shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL']
 const ptyMap = {}
 
 let mainWindow
+
+const installExtensions = async () => {
+  // eslint-disable-next-line global-require
+  const installer = require('electron-devtools-installer')
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
+
+  await Promise.all(
+    extensions.map(async name => {
+      try {
+        await installer.default(installer[name], forceDownload)
+      } catch (e) {
+        console.log(`Error installing ${name} extension: ${e.message}`)
+      }
+    })
+  )
+}
 
 const openPty = id => {
   if (ptyMap[id]) {
@@ -33,7 +53,7 @@ const openPty = id => {
   ptyMap[id] = ptyProcess
 }
 
-function createWindow() {
+const createWindow = () => {
   const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
   mainWindow = new BrowserWindow({
     width: width,
@@ -43,16 +63,36 @@ function createWindow() {
     }
   })
 
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile(path.resolve(path.join(__dirname, '../renderer/index.html')))
 
-  mainWindow.webContents.openDevTools()
+  if (isDevelopment) {
+    // auto-open dev tools
+    mainWindow.webContents.openDevTools()
+
+    // add inspect element on right click menu
+    mainWindow.webContents.on('context-menu', (e, props) => {
+      Menu.buildFromTemplate([
+        {
+          label: 'Inspect element',
+          click: () => {
+            mainWindow.inspectElement(props.x, props.y)
+          }
+        }
+      ]).popup(mainWindow)
+    })
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', async () => {
+  if (isDevelopment) {
+    await installExtensions()
+  }
+  createWindow()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
