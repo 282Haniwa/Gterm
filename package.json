@@ -1,6 +1,6 @@
 {
   "name": "gterm",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "GUIを用いたコマンドのビルドができるターミナルエミュレータ",
   "main": "init.js",
   "author": "282Haniwa",
